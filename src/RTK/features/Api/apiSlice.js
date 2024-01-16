@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const apiSlice = createApi({
     reducerPath: "api",
     baseQuery: fetchBaseQuery({
-        baseUrl: process.env.REACT_APP_BASE_URL,
+        baseUrl: "https://reqres.in/api",
         prepareHeaders: async (headers, { getState, endpoint }) => {
             const token = getState().auth?.accessToken;
             console.log(token, "from apiSlice")
