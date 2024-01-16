@@ -37,7 +37,6 @@
     height: 58px;
     border-radius: 16px;
     border-radius: 16px;
-    border: 1px solid #cac7c7;
     background: #FFF;
     padding-left: 14px;
 
@@ -54,7 +53,6 @@
     width: 22px;
     height: 22px;
     color: #C5CBD3;
-    flex-shrink: 0;
 }
 
 .label {
@@ -64,4 +62,72 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+}
+
+.eye {
+    font-size: 20px;
+    color: #B0B7C3;
+}
+
+.checkBoxText {
+    color: #B0B7C3;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    display: inline-block;
+}
+
+.signInBtn {
+    width: 540px;
+    height: 58px;
+    border-radius: 16px;
+    border: 1px solid #377DFF;
+    background: #377DFF;
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    margin-top: 35px;
+    cursor: pointer;
+}
+
+.signInBtnText {
+    color: #FFF;
+    text-align: center;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.formFooter {
+    color: #B0B7C3;
+    text-align: center;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-top: 35px;
+}
+
+.formFooterLink {
+    color: #377DFF;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.invalidEmailError {
+    color: #FF5630;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-top: 16px;
 }
