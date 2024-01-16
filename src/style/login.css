@@ -1,0 +1,24 @@
+.loginTextHolder {
+    margin-bottom: 30px;
+}
+
+.signInText {
+    color: #323B4B;
+    text-align: center;
+    font-family: Inter;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-bottom: 19px;
+}
+
+.welcomeText {
+    color: #8A94A6;
+    text-align: center;
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}

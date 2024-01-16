@@ -1,14 +1,15 @@
 import LoginWithEmail from "./LoginWithEmail";
 import LoginWithSocial from "./LoginWithSocial";
+import "../../style/login.css"
 
 function Login() {
     return (
-        <div>
-            <LoginWithSocial />
-            <div>
-                <h2>Sign In</h2>
-                <p>Welcome back, you’ve been missed!</p>
+        <div className="text-center">
+            <div className="loginTextHolder">
+                <h2 className="signInText">Sign In</h2>
+                <p className="welcomeText">Welcome back, you’ve been missed!</p>
             </div>
+            <LoginWithSocial />
             <LoginWithEmail />
         </div>
     )
