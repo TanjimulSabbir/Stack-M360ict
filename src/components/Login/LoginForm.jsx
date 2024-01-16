@@ -12,8 +12,8 @@ function LoginForm() {
                     <input type="text" placeholder="Your Email" className="inputBox" onChange={()=>setOpen(false)} />
                 </div>
                 <div className="relative">
-                    <input type="text" placeholder="Password" className="inputBox" />
-                    {open && <BiLockOpen className="absolute placeHolderIcon top-4 left-2" />}
+                    <input type="text" placeholder="" className="inputBox" />
+                    {open &&<div className="absolute placeHolderIcon top-4 left-2"> <BiLockOpen  /> <span>Password</span></div>}
                 </div>
             </div>
         </form>
