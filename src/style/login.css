@@ -31,3 +31,26 @@
     font-weight: 500;
     line-height: normal;
 }
+
+.inputBox {
+    width: 540px;
+    height: 58px;
+    border-radius: 16px;
+    border-radius: 16px;
+    border: 1px solid #cac7c7;
+    background: #FFF;
+
+}
+
+.inputBox::placeholder {
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    padding-left: 36px;
+
+}
+
+.placeHolderIcon {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+}

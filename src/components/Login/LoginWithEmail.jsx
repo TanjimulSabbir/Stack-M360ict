@@ -1,7 +1,11 @@
+import LoginForm from "./LoginForm";
+
 function LoginWithEmail() {
-  return (
-    <div>LoginWithEmail</div>
-  )
+    return (
+        <div>
+            <LoginForm />
+        </div>
+    )
 }
 
 export default LoginWithEmail;
