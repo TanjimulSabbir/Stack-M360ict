@@ -52,5 +52,6 @@
 .placeHolderIcon {
     width: 22px;
     height: 22px;
+    color: #C5CBD3;
     flex-shrink: 0;
 }
