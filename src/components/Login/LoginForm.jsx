@@ -8,7 +8,8 @@ import IsEmailValid from "../utils/IsEmailValid";
 
 function LoginForm() {
     const [formData, setFormData] = useState({ email: "", password: "" });
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(false);
+    const [isValid, setValid] = useState(null);
 
     const handleFormData = (event) => {
         event.preventDefault();
@@ -18,7 +19,19 @@ function LoginForm() {
 
     }
 
-    console.log(IsEmailValid(formData?.email))
+    const debounce = (fn, delay) => {
+        let timeOutId;
+        return () => {
+            clearTimeout(timeOutId)
+            timeOutId = setTimeout(() => {
+                setValid(fn(formData?.email))
+            }, delay)
+        }
+    }
+
+    const emailTyped = debounce(IsEmailValid, 3000)
+
+    console.log(isValid, "isValid")
     return (
         <form onSubmit={handleSubmit}>
             <div className="flex flex-col items-center space-y-12">
@@ -37,7 +50,7 @@ function LoginForm() {
                         onChange={(event) => handleFormData(event)}
                         required
                     />
-                    {formData?.email&& IsEmailValid(formData?.email) === null ? <small className="invalidEmailError block text-start">Please enter a valid email address.</small> : ""}
+                    {formData?.email && isValid == null ? <small className="invalidEmailError block text-start">Please enter a valid email address.</small> : ""}
                 </div>
                 {/* Password */}
                 <div className="relative">
@@ -75,7 +88,6 @@ function LoginForm() {
                     <p className="formFooter">Don’t have an account yet? <Link className="formFooterLink" to="/signup">Sign Up</Link></p>
                 </div>
             </div>
-
         </form>
     );
 }
