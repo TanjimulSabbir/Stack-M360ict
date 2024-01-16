@@ -39,6 +39,7 @@
     border-radius: 16px;
     border: 1px solid #cac7c7;
     background: #FFF;
+    padding-left: 14px;
 
 }
 
@@ -57,5 +58,10 @@
 }
 
 .label {
-    color: #C5CBD3;
+    color: #B0B7C3;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
 }
