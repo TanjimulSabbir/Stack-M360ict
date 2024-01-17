@@ -21,7 +21,7 @@ export const authApi = apiSlice.injectEndpoints({
                     body: data,
                 };
             }
-        }),
+        })
     })
 })
 

@@ -2,12 +2,22 @@ import googleIcon from "../../assets/google.svg"
 import appleIcon from "../../assets/apple.svg"
 import auth from "../utils/Firebase";
 import { useSignInWithApple, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useEffect } from "react";
+import { useLoginMutation } from "../../RTK/features/auth/authApi";
 
 function LoginWithSocial() {
     const btnStyle = "flex items-center space-x-2 bg-[#F0F5FA] rounded-3xl w-[255px] h-14 text-center justify-center"
     const [signInWithGoogle, GoogleUser, loading1, error1] = useSignInWithGoogle(auth);
     const [signInWithApple, AppleUser, loading2, error2] = useSignInWithApple(auth);
+    const [login, { data }] = useLoginMutation();
 
+    console.log(GoogleUser, "GoogleUser")
+
+    useEffect(() => {
+        // if (GoogleUser?.uid) {
+        //     login()
+        // }
+    }, [GoogleUser, AppleUser])
 
     return (
         <div className="flex flex-col md:flex-row items-center justify-center space-y-7 md:space-y-0 md:space-x-7">

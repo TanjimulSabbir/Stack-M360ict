@@ -6,14 +6,14 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import IsEmailValid from "../utils/IsEmailValid";
 import { debounce } from "../utils/Debounce";
-import { useAddUserMutation, useGetUsersQuery } from "../../RTK/features/users/usersApi";
+import { useRegisterMutation } from "../../RTK/features/auth/authApi";
 
 
 function LoginForm() {
     const [formData, setFormData] = useState({ email: "", password: "" });
     const [open, setOpen] = useState(false);
     const [valid, setValid] = useState(true);
-    const [addUser, { data: userAdded, isSuccess, isLoading, error }] = useAddUserMutation();
+    const [register, { data: registerdUser, isSuccess, isLoading, error }] = useRegisterMutation();
     // const { data: AllUser } = useGetUsersQuery();
 
     const handleFormData = (event) => {
@@ -33,7 +33,7 @@ function LoginForm() {
         event.preventDefault();
         if (formData?.email && formData?.password) {
             console.log({ ...formData }, "formData")
-            addUser({ data: { ...formData, username: "Sabbir Hossen" } })
+            register({ data: { ...formData, username: "Sabbir Hossen" } })
         }
     }
 
