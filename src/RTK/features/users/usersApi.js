@@ -2,6 +2,11 @@ import { apiSlice } from "../Api/apiSlice";
 
 const usersApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
+        getUsers: builder.query({
+            query: (page = 2) => ({
+                url: `/users?per_page=10&page=${page}`
+            })
+        }),
         specifiedUser: builder.query({
             query: (email) => ({
                 url: `/users?email=${email}`
@@ -9,7 +14,7 @@ const usersApi = apiSlice.injectEndpoints({
         }),
         addUser: builder.mutation({
             query: ({ data }) => ({
-                url: "/users",
+                url: "/register",
                 method: "POST",
                 body: data
             })
@@ -24,4 +29,4 @@ const usersApi = apiSlice.injectEndpoints({
     })
 })
 
-export const { useSpecifiedUserQuery, useAddUserMutation, useEditUserMutation } = usersApi;
+export const { useGetUsersQuery, useSpecifiedUserQuery, useAddUserMutation, useEditUserMutation } = usersApi;

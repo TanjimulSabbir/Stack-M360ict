@@ -2,18 +2,19 @@ import { MdOutlineAlternateEmail } from "react-icons/md";
 import { BiLockOpen } from "react-icons/bi";
 import { BiSolidShow } from "react-icons/bi";
 import { BsEyeSlash } from "react-icons/bs";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import IsEmailValid from "../utils/IsEmailValid";
 import { debounce } from "../utils/Debounce";
-import { useAddUserMutation } from "../../RTK/features/users/usersApi";
+import { useAddUserMutation, useGetUsersQuery } from "../../RTK/features/users/usersApi";
 
 
 function LoginForm() {
     const [formData, setFormData] = useState({ email: "", password: "" });
     const [open, setOpen] = useState(false);
     const [valid, setValid] = useState(true);
-    const [addUser,data, isSuccess, isLoading, error] = useAddUserMutation();
+    const [addUser, { data: userAdded, isSuccess, isLoading, error }] = useAddUserMutation();
+    // const { data: AllUser } = useGetUsersQuery();
 
     const handleFormData = (event) => {
         setFormData(prev => ({ ...prev, [event.target.name]: event.target.value }));
@@ -31,7 +32,8 @@ function LoginForm() {
     const handleSubmit = (event) => {
         event.preventDefault();
         if (formData?.email && formData?.password) {
-            addUser({ ...formData })
+            console.log({ ...formData }, "formData")
+            addUser({ ...formData, userName: "Sabbir Hossen" })
         }
     }
 
