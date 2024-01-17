@@ -15,21 +15,21 @@ function LoginForm() {
 
     const handleFormData = (event) => {
         setFormData(prev => (setFormData({ ...prev, [event.target.name]: event.target.value })));
-        if (event.target.name == "email") {
+        if (event.target.name === "email") {
             emailValidityChecking(event.target.value)
         }
     }
+    const handleEmail = (email) => {
+        const emailValidity = IsEmailValid(email);
+        setValid(emailValidity);
+    }
+    const emailValidityChecking = debounce(handleEmail, 700);
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
     }
 
-    const handleEmail = (email) => {
-        const emailValidity = IsEmailValid(email);
-        setValid(emailValidity);
-    }
-
-    const emailValidityChecking = debounce(handleEmail, 500)
 
     return (
         <form onSubmit={handleSubmit}>
@@ -44,7 +44,7 @@ function LoginForm() {
                     }
 
                     <input type="text"
-                        className={`inputBox`}
+                        className={`inputBox ${valid || "invalidEmailInput"}`}
                         name="email"
                         onChange={(event) => handleFormData(event)}
                         required

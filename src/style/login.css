@@ -36,10 +36,10 @@
     width: 540px;
     height: 58px;
     border-radius: 16px;
-    border-radius: 16px;
+    border: 1px solid #dbd9d9;
     background: #FFF;
     padding-left: 14px;
-
+    outline-color: rgb(215, 213, 211);
 }
 
 .inputBox::placeholder {
@@ -120,6 +120,17 @@
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+}
+
+.invalidEmailInput {
+    border-radius: 16px;
+    border: 1px solid #FF5630;
+    background: #FFF;
+    box-shadow: 0px 6px 8px 0px rgba(255, 86, 48, 0.10);
+}
+
+.invalidEmailInput:focus {
+    outline: none;
 }
 
 .invalidEmailError {
