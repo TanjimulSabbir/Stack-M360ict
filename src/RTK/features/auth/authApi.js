@@ -6,7 +6,7 @@ export const authApi = apiSlice.injectEndpoints({
             query: ({ data }) => {
                 console.log(data, "from usersApi");
                 return {
-                    url: "/register",
+                    url: "/users",
                     method: "POST",
                     body: data,
                 };

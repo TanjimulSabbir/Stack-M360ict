@@ -7,45 +7,55 @@ import { useLoginMutation, useRegisterMutation } from "../../RTK/features/auth/a
 import { useGetUsersQuery, useSpecifiedUserQuery } from "../../RTK/features/users/usersApi";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
+import { userLogOut, userLoggedIn } from "../../RTK/features/auth/authSlice";
 
 function LoginWithSocial() {
     const btnStyle = "flex items-center space-x-2 bg-[#F0F5FA] rounded-3xl w-[255px] h-14 text-center justify-center"
     const [signInWithGoogle] = useSignInWithGoogle(auth);
     const [signInWithApple] = useSignInWithApple(auth);
-    const { getUsers, isLoading, isError, error } = useGetUsersQuery();
-    const [login, { data }] = useLoginMutation();
     const [register] = useRegisterMutation();
     const [signInData, setSiginData] = useState("");
-    const { data: registeredUser } = useSpecifiedUserQuery(signInData?.user?.email, { skip: !signInData?.user?.email });
-    const dispatch = useDispatch();
-
+    const { data: registeredUser } = useSpecifiedUserQuery(signInData.user?.email, { skip: !signInData?.user?.email });
+   
     const handleLogin = async (signInType) => {
         try {
             const data = signInType === "google" ? await signInWithGoogle() : await signInWithApple();
-            if (data?.uid) {
-                setSiginData(data)
+            console.log(data);
+            if (data?.user?.uid) {
+                setSiginData(data.user)
             }
-
+            console.log("first Step-Google login", { googleSIgnData: data })
         } catch (error) {
             toast.error("Login error");
+            userLogOut();
+            localStorage.clear();
+            console.log({error});
         }
     };
 
     useEffect(() => {
-        if (signInData?.user) {
-            const { displayName, email, photoURL, uid } = signInData.user;
+        try {
+            const { uid, displayName, email, photoURL, accessToken } = signInData || {};
 
-            if (registeredUser?.password) {
-                const alreadyUserIn = registeredUser.password === uid;
+            if (uid) {
+                const userData = { username: displayName, email, password: uid, avatar: photoURL };
 
-                if (!alreadyUserIn) {
-                    register({ username: displayName, email: email, password: uid, avatar: photoURL });
+                // if user not registered on db or if exists anyway, checking uid with the same email
+                if (!registeredUser?.password || registeredUser.password !== uid) {
+                    register({ data: { ...userData } });
                 }
-            } else {
-                register({ username: displayName, email: email, password: uid, avatar: photoURL });
+
+                userLoggedIn({ user: { ...userData }, accessToken });
+                localStorage.setItem("auth", JSON.stringify({ user: { ...userData }, accessToken }));
             }
+        } catch (error) {
+            userLogOut();
+            localStorage.clear();
+            toast.error("Login error");
+            console.error({ error });
         }
-    }, [signInData, dispatch, login, registeredUser, register])
+    }, [signInData, registeredUser, register]);
+
 
     return (
         <div className="flex flex-col md:flex-row items-center justify-center space-y-7 md:space-y-0 md:space-x-7">
