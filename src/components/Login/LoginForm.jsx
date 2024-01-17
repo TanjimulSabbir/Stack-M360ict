@@ -14,7 +14,7 @@ function LoginForm() {
     const [valid, setValid] = useState(true);
 
     const handleFormData = (event) => {
-        setFormData(prev => (setFormData({ ...prev, [event.target.name]: event.target.value })));
+        setFormData(prev => ({ ...prev, [event.target.name]: event.target.value }));
         if (event.target.name === "email") {
             emailValidityChecking(event.target.value)
         }
@@ -28,6 +28,7 @@ function LoginForm() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        console.log({ formData }, "formData");
     }
 
 
@@ -82,8 +83,8 @@ function LoginForm() {
                     </div>
 
                     {/* Form button */}
-                    <div className="signInBtn">
-                        <button className="signInBtnText">Sign In</button>
+                    <div>
+                        <button className="signInBtn">Sign In</button>
                     </div>
                     <p className="formFooter">Don’t have an account yet? <Link className="formFooterLink" to="/signup">Sign Up</Link></p>
                 </div>

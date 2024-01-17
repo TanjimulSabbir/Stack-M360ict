@@ -85,14 +85,8 @@
     border-radius: 16px;
     border: 1px solid #377DFF;
     background: #377DFF;
-    display: flex;
-    justify-items: center;
-    justify-content: center;
     margin-top: 35px;
     cursor: pointer;
-}
-
-.signInBtnText {
     color: #FFF;
     text-align: center;
     font-family: Inter;
@@ -168,15 +162,15 @@
     }
 }
 
-@media (min-width: 740px) {
+/* @media (min-width: 740px) {
     .signInBtn {
-        min-width: 540px;
+        min-width: 500px;
     }
 
     .inputBox {
-        min-width: 540px;
+        min-width: 500px;
     }
-}
+} */
 
 /* @media (min-width: 540px) {
     .signInBtn {

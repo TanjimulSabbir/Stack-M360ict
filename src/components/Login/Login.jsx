@@ -5,7 +5,7 @@ import Divider from "../utils/Divider";
 
 function Login() {
     return (
-        <div className="text-center mt-20">
+        <div className="text-center mt-20 mx-auto">
             <div className="loginTextHolder">
                 <h2 className="signInText">Sign In</h2>
                 <p className="welcomeText">Welcome back, you’ve been missed!</p>
