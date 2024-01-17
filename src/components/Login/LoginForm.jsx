@@ -5,6 +5,7 @@ import { GoEyeClosed } from "react-icons/go";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import IsEmailValid from "../utils/IsEmailValid";
+import { debounce } from "../utils/Debounce";
 
 
 function LoginForm() {
@@ -14,33 +15,22 @@ function LoginForm() {
 
     const handleFormData = (event) => {
         setFormData(prev => (setFormData({ ...prev, [event.target.name]: event.target.value })));
-        console.log(event.target.value)
-        emailValidityChecking();
+        if (event.target.name == "email") {
+            emailValidityChecking(event.target.value)
+        }
     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
     }
 
-    const debounce = (fn, delay) => {
-        let timeOutId;
-        return () => {
-            clearTimeout(timeOutId);
-            timeOutId = setTimeout(() => {
-                fn(formData?.email)
-            }, delay)
-        }
-    }
-    const handleEmail = () => {
-        if (formData?.email) {
-            const emailValidity = IsEmailValid(formData.email);
-            setValid(emailValidity);
-        }
+    const handleEmail = (email) => {
+        const emailValidity = IsEmailValid(email);
+        setValid(emailValidity);
     }
 
-    const emailValidityChecking = debounce(handleEmail, 300)
+    const emailValidityChecking = debounce(handleEmail, 500)
 
-    console.log(valid, "isValid")
     return (
         <form onSubmit={handleSubmit}>
             <div className="flex flex-col items-center space-y-12">
