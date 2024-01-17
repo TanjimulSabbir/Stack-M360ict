@@ -16,7 +16,8 @@ function LoginWithSocial() {
     const [register] = useRegisterMutation();
     const [signInData, setSiginData] = useState("");
     const { data: registeredUser } = useSpecifiedUserQuery(signInData.user?.email, { skip: !signInData?.user?.email });
-   
+    const dispatch = useDispatch();
+
     const handleLogin = async (signInType) => {
         try {
             const data = signInType === "google" ? await signInWithGoogle() : await signInWithApple();
@@ -27,9 +28,9 @@ function LoginWithSocial() {
             console.log("first Step-Google login", { googleSIgnData: data })
         } catch (error) {
             toast.error("Login error");
-            userLogOut();
+            dispatch(userLogOut())
             localStorage.clear();
-            console.log({error});
+            console.log({ error });
         }
     };
 
@@ -45,16 +46,16 @@ function LoginWithSocial() {
                     register({ data: { ...userData } });
                 }
 
-                userLoggedIn({ user: { ...userData }, accessToken });
+                dispatch(userLoggedIn({ user: { ...userData }, accessToken }));
                 localStorage.setItem("auth", JSON.stringify({ user: { ...userData }, accessToken }));
             }
         } catch (error) {
-            userLogOut();
+            dispatch(userLogOut())
             localStorage.clear();
             toast.error("Login error");
             console.error({ error });
         }
-    }, [signInData, registeredUser, register]);
+    }, [signInData, registeredUser, register, dispatch]);
 
 
     return (
