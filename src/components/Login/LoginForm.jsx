@@ -32,10 +32,11 @@ function LoginForm() {
 
 
     return (
-        <form onSubmit={handleSubmit} className="w-full">
+        <form onSubmit={handleSubmit}>
             <div className="flex flex-col items-center space-y-12">
                 <div className="relative">
-                    {formData?.email !== "" ||
+                    {
+                        formData?.email !== "" ||
                         <div className="absolute top-3 left-4 flex items-center space-x-1">
                             <MdOutlineAlternateEmail className="placeHolderIcon" />
                             <span className="label">Your Email</span>
@@ -43,14 +44,14 @@ function LoginForm() {
                     }
 
                     <input type="text"
-                        className={`inputBox ${valid || "invalidEmailInput"}`}
+                        className={`inputBox min-w-[260px] md:w-auto ${valid || "invalidEmailInput"}`}
                         name="email"
                         onChange={(event) => handleFormData(event)}
                         required
                     />
                     {valid || <small className="invalidEmailError block text-start">Please enter a valid email address.</small>}
                 </div>
-                
+
                 {/* Password */}
                 <div className="relative">
                     {formData?.password !== "" ||

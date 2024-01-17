@@ -4,7 +4,7 @@ import appleIcon from "../../assets/apple.svg"
 function LoginWithSocial() {
     const btnStyle = "flex items-center space-x-2 bg-[#F0F5FA] rounded-3xl w-[255px] h-14 text-center justify-center"
     return (
-        <div className="flex items-center justify-center space-x-7">
+        <div className="flex flex-col md:flex-row items-center justify-center space-y-7 md:space-y-0 md:space-x-7 ">
             <div>
                 <button className={btnStyle}>
                     <img src={googleIcon} alt={"google"} />

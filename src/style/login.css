@@ -159,34 +159,31 @@
 
 
 @media (min-width: 1040px) {
-    .signInBtn {
-        width: 540px;
+    .inputBox {
+        min-width: 540px;
     }
 
-    .inputBox {
-        width: 540px;
+    .signInBtn {
+        min-width: 540px;
     }
 }
 
 @media (min-width: 740px) {
     .signInBtn {
-        width: 440px;
+        min-width: 540px;
     }
 
     .inputBox {
-        width: 440px;
+        min-width: 540px;
     }
 }
 
-
-@media (min-width: 540px) {
+/* @media (min-width: 540px) {
     .signInBtn {
-        width: 100%;
-        padding: 0 60px;
+        min-width: 440px;
     }
 
     .inputBox {
-        width: 100%;
-        padding: 0 60px;
+        min-width: 440px;
     }
-}
+} */
