@@ -6,12 +6,14 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import IsEmailValid from "../utils/IsEmailValid";
 import { debounce } from "../utils/Debounce";
+import { useAddUserMutation } from "../../RTK/features/users/usersApi";
 
 
 function LoginForm() {
     const [formData, setFormData] = useState({ email: "", password: "" });
     const [open, setOpen] = useState(false);
     const [valid, setValid] = useState(true);
+    const [addUser,data, isSuccess, isLoading, error] = useAddUserMutation();
 
     const handleFormData = (event) => {
         setFormData(prev => ({ ...prev, [event.target.name]: event.target.value }));
@@ -28,7 +30,9 @@ function LoginForm() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log({ formData }, "formData");
+        if (formData?.email && formData?.password) {
+            addUser({ ...formData })
+        }
     }
 
 
