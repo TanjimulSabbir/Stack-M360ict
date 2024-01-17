@@ -13,9 +13,9 @@ function LoginWithSocial() {
     const btnStyle = "flex items-center space-x-2 bg-[#F0F5FA] rounded-3xl w-[255px] h-14 text-center justify-center"
     const [signInWithGoogle] = useSignInWithGoogle(auth);
     const [signInWithApple] = useSignInWithApple(auth);
-    const [register] = useRegisterMutation();
     const [signInData, setSiginData] = useState("");
-    const { data: registeredUser } = useSpecifiedUserQuery(signInData.user?.email, { skip: !signInData?.user?.email });
+    const [register] = useRegisterMutation();
+    const { data: registeredUser } = useSpecifiedUserQuery(signInData?.user?.email, { skip: !signInData?.user?.email });
     const dispatch = useDispatch();
 
     const handleLogin = async (signInType) => {
@@ -30,7 +30,7 @@ function LoginWithSocial() {
             toast.error("Login error");
             dispatch(userLogOut())
             localStorage.clear();
-            console.log({ error });
+            console.log(error);
         }
     };
 
@@ -41,7 +41,7 @@ function LoginWithSocial() {
             if (uid) {
                 const userData = { username: displayName, email, password: uid, avatar: photoURL };
 
-                // if user not registered on db or if exists anyway, checking uid with the same email
+                // if user not exists on db or if exists anyway, checking uid with the same email
                 if (!registeredUser?.password || registeredUser.password !== uid) {
                     register({ data: { ...userData } });
                 }

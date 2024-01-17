@@ -1,0 +1,22 @@
+$char-w: 1ch;
+$gap: 3*$char-w;
+$n-char: 6;
+$in-w: $n-char*($char-w + $gap);
+
+.createPassword {
+    display: block;
+    margin: .6em auto;
+    border: none;
+    padding: 0;
+    width: $in-w;
+    background: repeating-linear-gradient(90deg,
+        #38CB89 0, #38CB89 $char-w,
+        transparent 0, transparent $char-w + $gap) 0 100%/ #{$in-w - $gap} 3px no-repeat;
+    font: 5ch droid sans mono, consolas, monospace;
+    letter-spacing: $gap;
+}
+
+.createPassword:focus {
+    outline: none;
+    color: #38CB89;
+}
