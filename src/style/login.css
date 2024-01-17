@@ -33,7 +33,7 @@
 }
 
 .inputBox {
-    width: 540px;
+    width: 100%;
     height: 58px;
     border-radius: 16px;
     border: 1px solid #dbd9d9;
@@ -80,7 +80,7 @@
 }
 
 .signInBtn {
-    width: 540px;
+    width: 100%;
     height: 58px;
     border-radius: 16px;
     border: 1px solid #377DFF;
@@ -141,4 +141,52 @@
     font-weight: 500;
     line-height: normal;
     margin-top: 16px;
+}
+
+/* Default styles for the checkbox */
+.check {
+    width: 20px;
+    height: 20px;
+    border-radius: 8px;
+    background: #EDEFF1;
+    border: 2px solid #ccc;
+}
+
+.check:checked {
+    border-color: #e2e4e5;
+    background-color: #007bff;
+}
+
+
+@media (min-width: 1040px) {
+    .signInBtn {
+        width: 540px;
+    }
+
+    .inputBox {
+        width: 540px;
+    }
+}
+
+@media (min-width: 740px) {
+    .signInBtn {
+        width: 440px;
+    }
+
+    .inputBox {
+        width: 440px;
+    }
+}
+
+
+@media (min-width: 540px) {
+    .signInBtn {
+        width: 100%;
+        padding: 0 60px;
+    }
+
+    .inputBox {
+        width: 100%;
+        padding: 0 60px;
+    }
 }

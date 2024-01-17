@@ -1,7 +1,7 @@
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import { BiLockOpen } from "react-icons/bi";
-import { GoEye } from "react-icons/go";
-import { GoEyeClosed } from "react-icons/go";
+import { BiSolidShow } from "react-icons/bi";
+import { BsEyeSlash } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import IsEmailValid from "../utils/IsEmailValid";
@@ -32,9 +32,8 @@ function LoginForm() {
 
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="w-full">
             <div className="flex flex-col items-center space-y-12">
-
                 <div className="relative">
                     {formData?.email !== "" ||
                         <div className="absolute top-3 left-4 flex items-center space-x-1">
@@ -51,6 +50,7 @@ function LoginForm() {
                     />
                     {valid || <small className="invalidEmailError block text-start">Please enter a valid email address.</small>}
                 </div>
+                
                 {/* Password */}
                 <div className="relative">
                     {formData?.password !== "" ||
@@ -69,13 +69,13 @@ function LoginForm() {
 
                     {/* password be showed or not be showed */}
                     <p className="absolute top-4 right-5 cursor-pointer">
-                        {open ? <GoEye className="eye" onClick={() => setOpen(!open)} /> : <GoEyeClosed className="eye" onClick={() => setOpen(!open)} />}
+                        {open ? <BiSolidShow className="eye" onClick={() => setOpen(!open)} /> : <BsEyeSlash className="eye" onClick={() => setOpen(!open)} />}
                     </p>
 
                     {/* Checkbox */}
                     <div className="mt-4">
                         <p className="label flex items-center space-x-2 justify-start">
-                            <input type="checkbox" className="checkbox cursor-pointer" />
+                            <input type="checkbox" className="check cursor-pointer" required />
                             <span className="checkBoxText">Remember me</span>
                         </p>
                     </div>
