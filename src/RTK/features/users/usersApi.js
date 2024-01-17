@@ -8,8 +8,8 @@ export const usersApi = apiSlice.injectEndpoints({
             })
         }),
         specifiedUser: builder.query({
-            query: (email) => ({
-                url: `/users?email=${email}`
+            query: (id) => ({
+                url: `/users?email=${id}`
             })
         }),
         editUser: builder.mutation({
