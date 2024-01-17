@@ -33,7 +33,7 @@ function LoginForm() {
         event.preventDefault();
         if (formData?.email && formData?.password) {
             console.log({ ...formData }, "formData")
-            addUser({ ...formData, userName: "Sabbir Hossen" })
+            addUser({ data: { ...formData, username: "Sabbir Hossen" } })
         }
     }
 

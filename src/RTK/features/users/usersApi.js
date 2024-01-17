@@ -1,4 +1,4 @@
-import { apiSlice } from "../Api/apiSlice";
+import { apiSlice } from "../api/apiSlice";
 
 const usersApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -13,11 +13,14 @@ const usersApi = apiSlice.injectEndpoints({
             })
         }),
         addUser: builder.mutation({
-            query: ({ data }) => ({
-                url: "/register",
-                method: "POST",
-                body: data
-            })
+            query: ({ data }) => {
+                console.log(data, "from usersApi");
+                return {
+                    url: "/users",
+                    method: "POST",
+                    body: data,
+                };
+            }
         }),
         editUser: builder.mutation({
             query: ({ id, data }) => ({
