@@ -2,19 +2,22 @@ import { MdOutlineAlternateEmail } from "react-icons/md";
 import { BiLockOpen } from "react-icons/bi";
 import { GoEye } from "react-icons/go";
 import { GoEyeClosed } from "react-icons/go";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import IsEmailValid from "../utils/IsEmailValid";
+import isEmailValid from "../utils/IsEmailValid";
 
 function LoginForm() {
     const [formData, setFormData] = useState({ email: "", password: "" });
     const [open, setOpen] = useState(false);
-    const [isValid, setValid] = useState(null);
+    const [valid, setValid] = useState(null)
 
     const handleFormData = (event) => {
         event.preventDefault();
-        setFormData(prev => (setFormData({ ...prev, [event.target.name]: event.target.value })))
+        setFormData(prev => (setFormData({ ...prev, [event.target.name]: event.target.value })));
+        setValid(emailTyped());
     }
+
     const handleSubmit = () => {
 
     }
@@ -22,16 +25,20 @@ function LoginForm() {
     const debounce = (fn, delay) => {
         let timeOutId;
         return () => {
-            clearTimeout(timeOutId)
+            clearTimeout(timeOutId);
             timeOutId = setTimeout(() => {
-                setValid(fn(formData?.email))
+                fn(formData.email)
             }, delay)
         }
     }
+    const handleEmail = () => {
+        const emailValidity = isEmailValid(formData.email);
+        console.log(emailValidity)
+    }
 
-    const emailTyped = debounce(IsEmailValid, 3000)
+    const emailTyped = debounce(handleEmail, 300)
 
-    console.log(isValid, "isValid")
+    console.log(valid, "isValid")
     return (
         <form onSubmit={handleSubmit}>
             <div className="flex flex-col items-center space-y-12">
@@ -50,7 +57,7 @@ function LoginForm() {
                         onChange={(event) => handleFormData(event)}
                         required
                     />
-                    {formData?.email && isValid == null ? <small className="invalidEmailError block text-start">Please enter a valid email address.</small> : ""}
+                    {formData?.email && valid ? "" : <small className="invalidEmailError block text-start">Please enter a valid email address.</small>}
                 </div>
                 {/* Password */}
                 <div className="relative">
