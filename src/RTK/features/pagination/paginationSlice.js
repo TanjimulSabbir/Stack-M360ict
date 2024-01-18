@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     pagiInfo: {},
-    currentPage: 1
+    currentPage: 1,
 }
 
 const paginationSlice = createSlice({

@@ -1,29 +1,21 @@
-import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setPage } from '../../RTK/features/pagination/paginationSlice';
 
 const Pagination = () => {
     const data = useSelector(state => state.pagination.pagiInfo);
 
     // Destructure with default values and check if data is not null
-    const { pages, per_page, total } = data || {};
-
-    const [currentPage, setCurrentPage] = useState(1);
+    const { per_page, total } = data || {};
     const totalPages = Math.ceil(total / per_page);
+    const dispatch = useDispatch();
 
-    useEffect(() => {
-        // onPageChange(currentPage);
-    }, [currentPage]);
-
-    const handlePageChange = (pageNumber) => {
-        setCurrentPage(pageNumber);
-    };
 
     return (
         <div>
             {/* Display pagination buttons */}
             <div className='flex items-center space-x-2'>
                 {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => (
-                    <kbd key={pageNumber} className="kbd cursor-pointer" onClick={() => handlePageChange(pageNumber)}>
+                    <kbd key={pageNumber} className="kbd cursor-pointer" onClick={() => dispatch(setPage(pageNumber))}>
                         {pageNumber}
                     </kbd>
                 ))}

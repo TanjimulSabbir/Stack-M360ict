@@ -1,10 +1,11 @@
 import { useGetUsersQuery } from "../../RTK/features/users/usersApi";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setPagination } from "../../RTK/features/pagination/paginationSlice";
 import User from "./User";
 
 function AllUser() {
-    const { data: userData, isLoading, isError, error } = useGetUsersQuery() || {};
+    const page = useSelector(state => state.pagination.currentPage)
+    const { data: userData, isLoading, isError, error } = useGetUsersQuery(page) || {};
     const dispatch = useDispatch();
     console.log(userData);
 
