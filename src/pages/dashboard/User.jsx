@@ -31,9 +31,9 @@ export default function User({ users }) {
             <div className="join space-x-2 mt-12 mb-8">
                 <kbd className={`kbd ${currentPage > 1 ? "cursor-pointer bg-green-500" : "cursor-not-allowed"}`} onClick={() => currentPage > 1 && dispatch(setPage(currentPage - 1))}><img src={control_double_left} alt="<<" /></kbd>
 
-                <kbd className="kbd cursor-pointer"><img src={Control_single_left} alt="<" /></kbd>
+                <kbd className="kbd"><img src={Control_single_left} alt="<" /></kbd>
                 <Pagination />
-                <kbd className="kbd cursor-pointer"><img src={Control_single_right} alt=">" /></kbd>
+                <kbd className="kbd"><img src={Control_single_right} alt=">" /></kbd>
 
                 <kbd className={`kbd ${currentPage < total_pages ? "cursor-pointer bg-green-500" : "cursor-not-allowed"}`} onClick={() => currentPage < total_pages && dispatch(setPage(currentPage + 1))}><img src={Control_double_right} alt=">>" /></kbd>
             </div>

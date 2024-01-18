@@ -2,10 +2,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setPage } from '../../RTK/features/pagination/paginationSlice';
 
 const Pagination = () => {
-    const data = useSelector(state => state.pagination.pagiInfo);
+    const { currentPage, pagiInfo } = useSelector(state => state.pagination);
 
     // Destructure with default values and check if data is not null
-    const { per_page, total } = data || {};
+    const { per_page, total } = pagiInfo || {};
     const totalPages = Math.ceil(total / per_page);
     const dispatch = useDispatch();
 
@@ -13,9 +13,9 @@ const Pagination = () => {
     return (
         <div>
             {/* Display pagination buttons */}
-            <div className='flex items-center space-x-2'>
+            <div className={`flex items-center space-x-2`}>
                 {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => (
-                    <kbd key={pageNumber} className="kbd cursor-pointer" onClick={() => dispatch(setPage(pageNumber))}>
+                    <kbd key={pageNumber} className={`kbd cursor-pointer ${currentPage===pageNumber && "bg-green-600"}`} onClick={() => dispatch(setPage(pageNumber))}>
                         {pageNumber}
                     </kbd>
                 ))}
