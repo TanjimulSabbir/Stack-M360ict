@@ -9,7 +9,7 @@ export const store = configureStore({
     reducer: {
         [apiSlice.reducerPath]: apiSlice.reducer,
         auth: authSlice,
-        pagination: paginationSlice,
+        pagination: paginationSlice
     },
     middleware: (getDefaultMiddlewares) => getDefaultMiddlewares().concat(apiSlice.middleware)
 })

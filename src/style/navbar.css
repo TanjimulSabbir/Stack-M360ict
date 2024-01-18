@@ -11,3 +11,10 @@
     font-weight: 500;
     line-height: normal;
 }
+
+.userSearchInput {
+    width: 539px;
+    height: 54px;
+    border-radius: 14px;
+    background: #F0F5FA;
+}

@@ -30,3 +30,13 @@
     border: 1px solid #F1F1F1;
     background: #FFF;
 }
+
+.tableTitle {
+    color: #323B4B;
+    font-family: Inter;
+    font-size: 23px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin: 24px 0;
+}

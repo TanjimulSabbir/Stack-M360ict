@@ -29,7 +29,7 @@ export default function Dashboard() {
                             </Link>
                         </li>
                         <li className={`menuHolder ${path === "/dashboard" && "activeMenu"}`}>
-                            <Link to="/users" className="flex items-center space-x-2">
+                            <Link to="/dashboard" className="flex items-center space-x-2">
                                 <img src={user} alt="" />
                                 <span>Users</span>
                             </Link>
