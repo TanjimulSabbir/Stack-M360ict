@@ -1,14 +1,10 @@
 import { useSelector } from "react-redux";
 import searchIcon from "../../assets/searchIcon.svg"
-import gravatar from "../../components/utils/gravatar";
 function UserNavbar() {
-  const data = useSelector(state => state.auth);
-  const { avatar, email } = data.user || {};
+  const data = useSelector(state => state.auth)||{};
+  const { avatar } = data?.user || {};
 
-  let emailAvatar;
-  if (email) {
-    emailAvatar = gravatar(email);
-  }
+  console.log(data,"userNavbar")
 
   return (
     <div className="flex">
@@ -19,7 +15,7 @@ function UserNavbar() {
         <input className="userSearchInput" type="text" />
       </div>
       <div>
-        <img className="shrink-0 h-12 w-12 rounded-full" src={avatar ? avatar : emailAvatar} alt="" />
+        <img className="shrink-0 h-12 w-12 rounded-full" src={avatar && avatar} alt="" />
       </div>
     </div>
   )

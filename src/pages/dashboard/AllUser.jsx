@@ -5,7 +5,7 @@ import User from "./User";
 
 function AllUser() {
     const page = useSelector(state => state.pagination.currentPage)
-    const { data: userData, isLoading, isError, error } = useGetUsersQuery(page) || {};
+    const { data: userData, isLoading, isError, error } = useGetUsersQuery(page);
     const dispatch = useDispatch();
     console.log(userData);
 
