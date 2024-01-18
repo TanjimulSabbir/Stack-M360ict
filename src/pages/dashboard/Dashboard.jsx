@@ -1,10 +1,12 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import menu from "../../assets/menu 1.svg";
 import user from "../../assets/user 1.svg";
 import invoice from "../../assets/invoice 1.svg";
 import "../../style/dashboard.css";
 
 export default function Dashboard() {
+    const path = useLocation().pathname;
+    console.log(path, "path")
     return (
         <div>
             <div className="drawer lg:drawer-open">
@@ -20,20 +22,20 @@ export default function Dashboard() {
                     <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
                     <ul className="menu p-4 w-80 min-h-full ml-12 pt-10">
                         {/* Sidebar content here */}
-                        <li className="menuHolder">
+                        <li className={`menuHolder ${path === "/dashboard" && ""}`}>
                             <Link to="/dashbaord" className="flex items-center space-x-2">
                                 <img src={menu} alt="" />
                                 <span>Dashboard</span>
                             </Link>
                         </li>
-                        <li className="menuHolder">
+                        <li className={`menuHolder ${path === "/dashboard" && "activeMenu"}`}>
                             <Link to="/users" className="flex items-center space-x-2">
                                 <img src={user} alt="" />
                                 <span>Users</span>
                             </Link>
                         </li>
 
-                        <li className="menuHolder">
+                        <li className={`menuHolder ${path === "/sales" && "activeMenu"}`}>
                             <Link to="/sales" className="flex items-center space-x-2">
                                 <img src={invoice} alt="" />
                                 <span>Sales</span>
