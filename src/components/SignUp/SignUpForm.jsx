@@ -21,6 +21,9 @@ function SignUpForm() {
         if (event.target.name === "email") {
             emailValidityChecking(event.target.value)
         }
+        if (event.target.value.length === 6) {
+            event.target.blur();
+        }
     }
     const handleEmail = (email) => {
         const emailValidity = IsEmailValid(email);
@@ -76,7 +79,7 @@ function SignUpForm() {
                 </div>
 
                 {/* Password */}
-                <div className="">
+                <div className="relative">
                     <div className="flex items-center">
                         <BiLockOpen className="placeHolderIcon" />
                         <span className="label">Create Password</span>
@@ -88,6 +91,7 @@ function SignUpForm() {
                         name="password"
                         onChange={(event) => handleFormData(event)}
                         value={formData.password}
+                        onKeyUp="if(this.value.length == 6) this.blur()"
                         required
                     />
 
