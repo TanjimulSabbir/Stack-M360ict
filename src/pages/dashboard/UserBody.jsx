@@ -1,6 +1,12 @@
+import { BsTrash3 } from "react-icons/bs";
+import { BiEdit } from "react-icons/bi";
+import { useDeleteUserMutation } from "../../RTK/features/users/usersApi";
+
+
 /* eslint-disable react/prop-types */
 function UserBody({ user }) {
     const { id, email, first_name, last_name, avatar } = user;
+    const [deleteUser, { isLoading }] = useDeleteUserMutation();
     return (
         <tr>
             <th>{id}</th>
@@ -20,7 +26,12 @@ function UserBody({ user }) {
             <td>
                 {email}
             </td>
-            <td>Blue</td>
+            <td>
+                <div className="flex items-center space-x-2">
+                    <BiEdit className={`text-green-500 cursor-pointer text-lg`} />
+                    <BsTrash3 onClick={() => deleteUser(id)} className={`text-red-500 cursor-pointer text-lg`} />
+                </div>
+            </td>
         </tr>
     )
 }

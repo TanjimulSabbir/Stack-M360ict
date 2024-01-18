@@ -4,7 +4,7 @@ import { setPagination } from "../../RTK/features/pagination/paginationSlice";
 import User from "./User";
 
 function AllUser() {
-    const page = useSelector(state => state.pagination.currentPage)
+    const page = useSelector(state => state.pagination.currentPage);
     const { data: userData, isLoading, isError, error } = useGetUsersQuery(page);
     const dispatch = useDispatch();
     console.log(userData);
