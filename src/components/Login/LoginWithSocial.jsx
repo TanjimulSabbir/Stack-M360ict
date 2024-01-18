@@ -8,14 +8,15 @@ import { useSpecifiedUserQuery } from "../../RTK/features/users/usersApi";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { userLogOut } from "../../RTK/features/auth/authSlice";
+import Error from "../ui/Error";
 
 function LoginWithSocial() {
     const btnStyle = "flex items-center space-x-2 bg-[#F0F5FA] rounded-3xl w-[255px] h-14 text-center justify-center"
     const [signInWithGoogle] = useSignInWithGoogle(auth);
     const [signInWithApple] = useSignInWithApple(auth);
     const [signInData, setSiginData] = useState("");
-    const [register, { data: regData isError: regError, isLoading: regLoading }] = useRegisterMutation();
-    const [login, { data: logData isError: logError, isLoading: logLoading }] = useLoginMutation();
+    const [register, { data: regData, isError: regError, isLoading: regLoading }] = useRegisterMutation();
+    const [login, { data: logData, isError: logError, isLoading: logLoading }] = useLoginMutation();
     const [signInError, setSigninError] = useState(false);
 
     const { data: isUserRegistered } = useSpecifiedUserQuery(signInData?.user?.email, { skip: !signInData?.user?.email });
@@ -44,7 +45,7 @@ function LoginWithSocial() {
                 const userData = { username: displayName, email, password: uid, avatar: photoURL };
 
                 // if user not exists on db or if exists anyway, checking uid with the same email
-                if (!registeredUser?.password || registeredUser.password !== uid) {
+                if (!isUserRegistered?.password || isUserRegistered.password !== uid) {
                     register({ data: { ...userData }, accessToken });
                 } else {
                     login({ data: { ...userData } })
@@ -53,21 +54,23 @@ function LoginWithSocial() {
         } catch (error) {
             dispatch(userLogOut())
             toast.error("Login error!");
-            setSigninError(error.data)
+            // setSigninError(error.data)
             console.error({ error });
         }
     }, [signInData, isUserRegistered, register, dispatch, login]);
 
     useEffect(() => {
+        if (regError || logError) {
+            signInError("Signin error!")
+            toast.error("Signin error!")
+        }
         if (logData.data.token) {
             toast.success("sign in successful!")
         }
         if (regData.data.id) {
             toast.success("sign in successful!")
         }
-    }, [regData, logData])
-
-
+    }, [regData, logData]);
 
     return (
         <>
@@ -85,6 +88,7 @@ function LoginWithSocial() {
                     </button>
                 </div>
             </div>
+            {regLoading || logLoading && <p>Loading...</p>}
             {signInError && <Error message={signInError} />}
         </>
     )
