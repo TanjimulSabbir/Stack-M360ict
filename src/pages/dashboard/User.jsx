@@ -7,13 +7,16 @@ import Control_double_right from "../../assets/Control_double_right.svg";
 import Pagination from "../../components/utils/Pagination";
 import { useDispatch, useSelector } from "react-redux";
 import { setPage } from "../../RTK/features/pagination/paginationSlice";
+import UserNavbar from "./UserNavbar";
 
 export default function User({ users }) {
     const { currentPage, pagiInfo } = useSelector(state => state.pagination) || {};
     const { total_pages } = pagiInfo || {};
     const dispatch = useDispatch();
+    
     return (
         <>
+            <UserNavbar />
             <div className="overflow-x-auto">
                 <h2 className="tableTitle">Users List</h2>
                 <table className="table">

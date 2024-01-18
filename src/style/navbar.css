@@ -15,6 +15,15 @@
 .userSearchInput {
     width: 539px;
     height: 54px;
-    border-radius: 14px;
-    background: #F0F5FA;
+    border-radius: 16px;
+    border: 1px solid #dbd9d9;
+    background: #FFF;
+    padding-left: 14px;
+    outline-color: rgb(215, 213, 211);
+}
+
+.userSearchInput::placeholder {
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    padding-left: 36px;
 }
