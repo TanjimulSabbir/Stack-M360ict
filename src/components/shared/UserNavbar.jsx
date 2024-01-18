@@ -1,6 +1,8 @@
 function UserNavbar() {
   return (
-    <div>UserNavbar</div>
+    <div>
+      
+    </div>
   )
 }
 

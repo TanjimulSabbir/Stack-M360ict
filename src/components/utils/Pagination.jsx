@@ -1,13 +1,18 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
-const Pagination = ({ totalItems, itemsPerPage, onPageChange }) => {
-    console.log(totalItems);
+const Pagination = () => {
+    const data = useSelector(state => state.pagination.pagiInfo);
+
+    // Destructure with default values and check if data is not null
+    const { pages, per_page, total } = data || {};
+
     const [currentPage, setCurrentPage] = useState(1);
-    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    const totalPages = Math.ceil(total / per_page);
 
     useEffect(() => {
-        onPageChange(currentPage);
-    }, [currentPage, onPageChange]);
+        // onPageChange(currentPage);
+    }, [currentPage]);
 
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -16,11 +21,13 @@ const Pagination = ({ totalItems, itemsPerPage, onPageChange }) => {
     return (
         <div>
             {/* Display pagination buttons */}
-            {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => (
-                <button key={pageNumber} onClick={() => handlePageChange(pageNumber)}>
-                    {pageNumber}
-                </button>
-            ))}
+            <div className='flex items-center space-x-2'>
+                {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => (
+                    <kbd key={pageNumber} className="kbd cursor-pointer" onClick={() => handlePageChange(pageNumber)}>
+                        {pageNumber}
+                    </kbd>
+                ))}
+            </div>
         </div>
     );
 };

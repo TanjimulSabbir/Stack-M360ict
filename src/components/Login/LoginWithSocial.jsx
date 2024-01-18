@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { userLogOut } from "../../RTK/features/auth/authSlice";
 import Error from "../ui/Error";
+import { useNavigate } from "react-router-dom";
 
 function LoginWithSocial() {
     const btnStyle = "flex items-center space-x-2 bg-[#F0F5FA] rounded-3xl w-[255px] h-14 text-center justify-center"
@@ -21,6 +22,7 @@ function LoginWithSocial() {
 
     const { data: isUserRegistered } = useSpecifiedUserQuery(signInData?.user?.email, { skip: !signInData?.user?.email });
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleLogin = async (signInType) => {
         try {
@@ -32,7 +34,7 @@ function LoginWithSocial() {
             console.log("first Step-Google login", { googleSIgnData: data })
         } catch (error) {
             toast.error("Login error");
-            setSigninError(error.data)
+            // setSigninError(error.data)
             console.log(error);
         }
     };
@@ -61,16 +63,19 @@ function LoginWithSocial() {
 
     useEffect(() => {
         if (regError || logError) {
-            signInError("Signin error!")
+            setSigninError("Signin error!")
             toast.error("Signin error!")
         }
-        if (logData.data.token) {
-            toast.success("sign in successful!")
+        if (logData?.token) {
+            navigate("/dashboard")
+            toast.success("Sign in successful!")
         }
-        if (regData.data.id) {
-            toast.success("sign in successful!")
+        console.log(regData, "regData")
+        if (regData?.id) {
+            navigate("/dashboard")
+            toast.success("Sign in successful!")
         }
-    }, [regData, logData]);
+    }, [regData, logData, regError, logError, signInError, navigate]);
 
     return (
         <>

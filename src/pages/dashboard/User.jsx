@@ -4,6 +4,7 @@ import control_double_left from "../../assets/Control_double_left.svg";
 import Control_single_left from "../../assets/Control_single_left.svg";
 import Control_single_right from "../../assets/Control_single_right.svg";
 import Control_double_right from "../../assets/Control_double_right.svg";
+import Pagination from "../../components/utils/Pagination";
 
 export default function User({ users }) {
     return (
@@ -23,11 +24,11 @@ export default function User({ users }) {
                 </tbody>
             </table>
             <div className="join space-x-2 mt-12 mb-8">
-                <kbd className="kbd"><img src={control_double_left} alt="<<" /></kbd>
-                <kbd className="kbd"><img src={Control_single_left} alt="<" /></kbd>
-                {/* <Pagination totalItems={{ ...pageIngo }} /> */}
-                <kbd className="kbd"><img src={Control_single_right} alt=">" /></kbd>
-                <kbd className="kbd"><img src={Control_double_right} alt=">>" /></kbd>
+                <kbd className="kbd cursor-pointer"><img src={control_double_left} alt="<<" /></kbd>
+                <kbd className="kbd cursor-pointer"><img src={Control_single_left} alt="<" /></kbd>
+                <Pagination />
+                <kbd className="kbd cursor-pointer"><img src={Control_single_right} alt=">" /></kbd>
+                <kbd className="kbd cursor-pointer"><img src={Control_double_right} alt=">>" /></kbd>
             </div>
         </div>
     )
