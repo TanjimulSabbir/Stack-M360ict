@@ -2,27 +2,28 @@ import { MdOutlineAlternateEmail } from "react-icons/md";
 import { BiLockOpen } from "react-icons/bi";
 import { BiSolidShow } from "react-icons/bi";
 import { BsEyeSlash } from "react-icons/bs";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import IsEmailValid from "../utils/IsEmailValid";
 import { debounce } from "../utils/Debounce";
 import { useRegisterMutation } from "../../RTK/features/auth/authApi";
+import toast from "react-hot-toast";
+import Error from "../ui/Error";
 
 
 function SignUpForm() {
     const [formData, setFormData] = useState({ email: "", name: "", password: "" });
+    const [registerError, setRegisterError] = useState(false);
     const [open, setOpen] = useState(false);
     const [valid, setValid] = useState(true);
-    const [register, { data: registerdUser, isSuccess, isLoading, error }] = useRegisterMutation();
-    // const { data: AllUser } = useGetUsersQuery();
+    const [register, { data: registerdUser, isError, isSuccess, isLoading, error }] = useRegisterMutation();
+
+    const navigate = useNavigate();
 
     const handleFormData = (event) => {
         setFormData(prev => ({ ...prev, [event.target.name]: event.target.value }));
         if (event.target.name === "email") {
             emailValidityChecking(event.target.value)
-        }
-        if (event.target.value.length === 6) {
-            event.target.blur();
         }
     }
     const handleEmail = (email) => {
@@ -35,10 +36,20 @@ function SignUpForm() {
     const handleSubmit = (event) => {
         event.preventDefault();
         if (formData?.email && formData?.password) {
-            console.log({ ...formData }, "formData")
             register({ data: { ...formData } })
         }
     }
+
+    useEffect(() => {
+        if (isError) {
+            setRegisterError(error.data)
+            toast.error(error.data)
+        }
+        if (registerdUser?.id && registerdUser?.email) {
+            navigate("/dashboard")
+            toast.success("Register Successful!")
+        }
+    }, [registerdUser, navigate, error, isError])
 
     return (
         <form onSubmit={handleSubmit}>
@@ -109,11 +120,13 @@ function SignUpForm() {
 
                     {/* Form button */}
                     <div>
-                        <button type="submit" className="signInBtn">Sign Up</button>
+                        <button type="submit" className="signInBtn">{isLoading ? "Loading..." : "Sign Up"}</button>
                     </div>
+
                     <p className="formFooter">Already have an account? <Link className="formFooterLink" to="/signin">Sign In</Link></p>
                 </div>
             </div>
+            {registerError && <Error message={registerError} />}
         </form>
     );
 }
