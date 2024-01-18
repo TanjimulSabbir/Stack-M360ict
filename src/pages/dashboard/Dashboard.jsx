@@ -28,7 +28,7 @@ export default function Dashboard() {
                     <ul className="menu p-4 w-80 min-h-full ml-12 pt-10">
                         {/* Sidebar content here */}
                         <li className={`menuHolder ${path === "/dashboard" && ""}`}>
-                            <Link to="/dashbaord" className="flex items-center space-x-2">
+                            <Link to="/dashboard" className="flex items-center space-x-2">
                                 <img src={menu} alt="" />
                                 <span>Dashboard</span>
                             </Link>
@@ -41,7 +41,7 @@ export default function Dashboard() {
                         </li>
 
                         <li className={`menuHolder ${path === "/sales" && "activeMenu"}`}>
-                            <Link to="/sales" className="flex items-center space-x-2">
+                            <Link to="/dashboard" className="flex items-center space-x-2">
                                 <img src={invoice} alt="" />
                                 <span>Sales</span>
                             </Link>
