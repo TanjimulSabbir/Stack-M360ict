@@ -4,7 +4,7 @@ import App from "../App";
 import Login from "../components/Login/Login";
 import SignUp from "../components/SignUp/SignUp";
 import Dashboard from "../pages/dashboard/Dashboard";
-import Users from "../pages/dashboard/Users";
+import AllUser from "../pages/dashboard/AllUser";
 
 const router = createBrowserRouter([{
     path: "/",
@@ -28,7 +28,7 @@ const router = createBrowserRouter([{
             children: [
                 {
                     path: "/dashboard",
-                    element: <Users />,
+                    element: <AllUser />,
                 }
             ]
         },

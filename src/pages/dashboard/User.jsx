@@ -8,9 +8,9 @@ import Pagination from "../../components/utils/Pagination";
 import { useSelector } from "react-redux";
 
 export default function User({ users }) {
-    const { user } = useSelector((state) => state.pagination) || {};
+    const { data } = useSelector((state) => state.pagination)||{};
 
-    console.log(user,"pages")
+    console.log(data,"pages")
     return (
         <div className="overflow-x-auto">
             <table className="table">

@@ -4,7 +4,7 @@ const initialState = {
     pagiInfo: {}
 }
 
-const pagination = createSlice({
+const paginationSlice = createSlice({
     name: "pagination",
     initialState,
     reducers: {
@@ -14,5 +14,5 @@ const pagination = createSlice({
     }
 });
 
-export const { getPagination } = pagination.actions;
-export default pagination.reducer;
+export const { getPagination } = paginationSlice.actions;
+export default paginationSlice.reducer;
