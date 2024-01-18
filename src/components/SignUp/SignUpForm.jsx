@@ -36,7 +36,7 @@ function SignUpForm() {
         event.preventDefault();
         if (formData?.email && formData?.password) {
             console.log({ ...formData }, "formData")
-            register({ data: { ...formData, username: "Sabbir Hossen" } })
+            register({ data: { ...formData } })
         }
     }
 
@@ -63,7 +63,7 @@ function SignUpForm() {
 
                 <div className="relative">
                     {
-                        formData?.email !== "" ||
+                        formData?.name !== "" ||
                         <div className="absolute top-3 left-4 flex items-center space-x-1">
                             <MdOutlineAlternateEmail className="placeHolderIcon" />
                             <span className="label">Your Name</span>
@@ -110,7 +110,7 @@ function SignUpForm() {
 
                     {/* Form button */}
                     <div>
-                        <button className="signInBtn">Sign Up</button>
+                        <button type="submit" className="signInBtn">Sign Up</button>
                     </div>
                     <p className="formFooter">Already have an account? <Link className="formFooterLink" to="/signin">Sign In</Link></p>
                 </div>

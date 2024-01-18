@@ -1,0 +1,13 @@
+.menuText {
+    color: #A7AFBC;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.menuHolder:hover {
+    border-radius: 12px;
+    background: #F0F5FA;
+}
