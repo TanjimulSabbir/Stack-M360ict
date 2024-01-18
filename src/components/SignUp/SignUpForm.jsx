@@ -91,7 +91,6 @@ function SignUpForm() {
                         name="password"
                         onChange={(event) => handleFormData(event)}
                         value={formData.password}
-                        onKeyUp="if(this.value.length == 6) this.blur()"
                         required
                     />
 

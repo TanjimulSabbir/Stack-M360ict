@@ -4,13 +4,8 @@ import control_double_left from "../../assets/Control_double_left.svg";
 import Control_single_left from "../../assets/Control_single_left.svg";
 import Control_single_right from "../../assets/Control_single_right.svg";
 import Control_double_right from "../../assets/Control_double_right.svg";
-import Pagination from "../../components/utils/Pagination";
-import { useSelector } from "react-redux";
 
 export default function User({ users }) {
-    const { data } = useSelector((state) => state.pagination)||{};
-
-    console.log(data,"pages")
     return (
         <div className="overflow-x-auto">
             <table className="table">
@@ -24,7 +19,7 @@ export default function User({ users }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map(user => <UserBody key={user.id} user={user} />)}
+                    {users?.map(user => <UserBody key={user.id} user={user} />)}
                 </tbody>
             </table>
             <div className="join space-x-2 mt-12 mb-8">
