@@ -2,22 +2,24 @@ import { MdOutlineAlternateEmail } from "react-icons/md";
 import { BiLockOpen } from "react-icons/bi";
 import { BiSolidShow } from "react-icons/bi";
 import { BsEyeSlash } from "react-icons/bs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import IsEmailValid from "../utils/IsEmailValid";
 import { debounce } from "../utils/Debounce";
-import { useRegisterMutation } from "../../RTK/features/auth/authApi";
-
+import { useLoginMutation } from "../../RTK/features/auth/authApi";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
     const [formData, setFormData] = useState({ email: "", password: "" });
+    const [loginError, setLoginError] = useState(false);
     const [open, setOpen] = useState(false);
     const [valid, setValid] = useState(true);
-    const [register, { data: registerdUser, isSuccess, isLoading, error }] = useRegisterMutation();
-    // const { data: AllUser } = useGetUsersQuery();
+    const [login, { data: loginUser, isError, isLoading, error }] = useLoginMutation();
+    const navigate = useNavigate();
 
     const handleFormData = (event) => {
         setFormData(prev => ({ ...prev, [event.target.name]: event.target.value }));
+
         if (event.target.name === "email") {
             emailValidityChecking(event.target.value)
         }
@@ -32,12 +34,20 @@ function LoginForm() {
     const handleSubmit = (event) => {
         event.preventDefault();
         if (formData?.email && formData?.password) {
-            console.log({ ...formData }, "formData")
-            register({ data: { ...formData, username: "Sabbir Hossen" } })
+            login({ data: { ...formData } })
         }
     }
 
-
+    useEffect(() => {
+        if (isError) {
+            setLoginError(error.data)
+            toast.error(error.data)
+        }
+        if (loginUser?.data.token) {
+            navigate("/dashboard")
+            toast.success("Login Successful!")
+        }
+    }, [loginUser, navigate, error, isError])
     return (
         <form onSubmit={handleSubmit}>
             <div className="flex flex-col items-center space-y-12">
@@ -90,11 +100,12 @@ function LoginForm() {
 
                     {/* Form button */}
                     <div>
-                        <button className="signInBtn">Sign In</button>
+                        <button type="submit" className="signInBtn" disabled={isLoading}>{isLoading ? "Loading..." : "Sign in"}</button>
                     </div>
                     <p className="formFooter">Don’t have an account yet? <Link className="formFooterLink" to="/signup">Sign Up</Link></p>
                 </div>
             </div>
+            {loginError && <Error message={loginError} />}
         </form>
     );
 }

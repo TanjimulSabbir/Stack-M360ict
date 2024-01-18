@@ -16,7 +16,7 @@ function SignUpForm() {
     const [registerError, setRegisterError] = useState(false);
     const [open, setOpen] = useState(false);
     const [valid, setValid] = useState(true);
-    const [register, { data: registerdUser, isError, isSuccess, isLoading, error }] = useRegisterMutation();
+    const [register, { data: registerdUser, isError, isLoading, error }] = useRegisterMutation();
 
     const navigate = useNavigate();
 
