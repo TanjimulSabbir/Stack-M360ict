@@ -1,5 +1,6 @@
 import { ErrorIcon, LoaderIcon } from "react-hot-toast";
 import { useGetUsersQuery } from "../../RTK/features/users/usersApi";
+import User from "./User";
 
 function Users() {
     const { data, isLoading, isError, error } = useGetUsersQuery();
@@ -7,7 +8,7 @@ function Users() {
     if (isLoading) content = <LoaderIcon />
     if (!isLoading && isError) content = <ErrorIcon />
     if (!isLoading && !isError && data?.data.length > 0) {
-        content = data?.data.map(user=>user.email)
+        content = <User users={data.data} />
     }
     return (
         <div>
