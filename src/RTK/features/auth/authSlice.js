@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
 
 const initialState = {
     accessToken: undefined,
@@ -16,6 +17,7 @@ const authSlice = createSlice({
         userLogOut: (state) => {
             state.user = undefined;
             state.accessToken = undefined;
+            toast.success("Logout Successful")
         }
     }
 });

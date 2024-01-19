@@ -17,7 +17,8 @@ export default function User() {
     const { currentPage, pagiInfo } = useSelector(state => state.pagination) || {};
     const [paginatinUserData, setPaginatinUserData] = useState([]);
     const [opened, setOpened] = useState(false);
-    const { total_pages } = pagiInfo || {};
+    // const { total_pages } = pagiInfo || {};
+    const total_pages = userReducerData?.length
     const dispatch = useDispatch();
 
     console.log({ userReducerData }, "useReducerData");
@@ -36,7 +37,7 @@ export default function User() {
         <>
             <UserNavbar />
             <div className="overflow-x-auto">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between ptSerif font-semibold">
                     <h2 className="tableTitle">Users List</h2>
                     <p className="flex items-center space-x-1 mr-4 bg-sky-300 rounded-lg p-3 cursor-pointer"
                         onClick={() => handleAdd()}
@@ -56,6 +57,8 @@ export default function User() {
                         {paginatinUserData?.map(user => <UserBody key={user.id} user={user} />)}
                     </tbody>
                 </table>
+
+                {/* Pagination */}
                 <div className="join space-x-2 mt-12 mb-8">
                     <kbd className={`kbd ${currentPage > 1 ? "cursor-pointer bg-green-500" : "cursor-not-allowed"}`} onClick={() => currentPage > 1 && dispatch(setPage(currentPage - 1))}><img src={control_double_left} alt="<<" /></kbd>
 

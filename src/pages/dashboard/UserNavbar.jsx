@@ -4,6 +4,8 @@ import notificationBell from "../../assets/notification-bell 1.svg"
 import { debounce } from "../../components/utils/Debounce";
 import { useState } from "react";
 import gravatarUrl from "gravatar-url";
+import { Link } from "react-router-dom";
+import { userLogOut } from "../../RTK/features/auth/authSlice";
 
 function UserNavbar() {
   const loggedInUser = useSelector(state => state.auth) || {};
@@ -27,18 +29,40 @@ function UserNavbar() {
 
   return (
     <div className="relative flex items-center justify-between mt-6">
+      {/* Left part of userNavbar or Search Input Box */}
       <div className="relative">
         <span className="absolute top-5 right-6">
           <img src={searchIcon} alt="" />
         </span>
-        <input onChange={(event) => searchUser(event.target.value)} className="userSearchInput" type="text" />
+        <input onChange={(event) => searchUser(event.target.value)} className="userSearchInput"
+          placeholder="Search" type="text" />
       </div>
-      <div className="flex items-center justify-center space-x-8 mr-4">
-        <img className="cursor-pointer" src={notificationBell} alt="notificatin_bell" />
-        <div onClick={() => setShowName(!showName)} className="relative">
-          <img className="shrink-0 h-10 w-10 rounded-full cursor-pointer" src={avatar || gravatarUrl(email, { size: 80 })} alt="" />
-          {showName && <p className="bg-black text-white mt-2 rounded p-2 absolute right-4">
-            {first_name && first_name + " " + last_name && last_name}</p>}
+
+      {/* Right part of User Navar */}
+      <div>
+        <div>
+          <ul className="menu menu-horizontal rounded-box flex items-center">
+            <li>
+              <p className="cursor-pointer" onClick={() => userLogOut()}>{loggedInUser.email ? "Logout" : "Login"}</p>
+            </li>
+            <li>
+              <img className="cursor-pointer" src={notificationBell} alt="notificatin_bell" />
+            </li>
+            <li>
+              <div className="dropdown dropdown-end">
+                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                  <img className="shrink-0 h-10 w-10 rounded-full cursor-pointer" src={avatar || gravatarUrl(email, { size: 80 })} alt="" />
+                </div>
+                <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                  <li>
+                    <a href="">
+                      {(first_name && first_name + " " + last_name && last_name) || "Name not found"}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
 
