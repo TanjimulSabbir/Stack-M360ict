@@ -7,7 +7,7 @@ import "../../style/dashboard.css";
 
 export default function Dashboard() {
     const path = useLocation().pathname;
-    console.log(path, "path")
+
     return (
         <>
             <div className="drawer lg:drawer-open">

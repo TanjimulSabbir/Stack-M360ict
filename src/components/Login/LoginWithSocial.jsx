@@ -31,7 +31,6 @@ function LoginWithSocial() {
             if (data?.user?.uid) {
                 setSiginData(data.user)
             }
-            console.log("first Step-Google login", { googleSIgnData: data })
         } catch (error) {
             toast.error("Login error");
         }

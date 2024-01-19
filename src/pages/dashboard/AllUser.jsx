@@ -11,7 +11,7 @@ function AllUser() {
     const userReducerData = useSelector(state => state.users?.allUserData);
     const dispatch = useDispatch();
 
-    // I don't know; suddenly, I havn't found getData, as for it I'm stop implementing this one.
+    // I don't know; suddenly, I havn't found getData. That's why I'm stop implementing this one.
 
     // useEffect(() => {
     //     if (userData?.data?.length > 0) {
@@ -26,7 +26,7 @@ function AllUser() {
     //     }
     // }, [userData, dispatch]);
 
-    if (isLoading) return <p>Loading...</p>
+    // if (isLoading) return <p>Loading...</p>
 
     return (
         <div>

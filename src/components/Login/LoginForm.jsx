@@ -46,8 +46,7 @@ function LoginForm() {
             setLoginError(error.data.error)
             toast.error(error.data.error)
         }
-        console.log(error, "error");
-
+       
         if (loginUser?.token) {
             navigate("/dashboard")
             toast.success("Login Successful!")

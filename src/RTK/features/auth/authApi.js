@@ -6,8 +6,7 @@ import { userLoggedIn } from "./authSlice";
 export const authApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         register: builder.mutation({
-            query: ({ data, accessToken }) => {
-                console.log(data, "from usersApi");
+            query: ({ data,accessToken }) => {
                 // "/register" api showing problem, but "/users" api giving success response. 
                 // for a successful response I'm using "/users" api
                 return {
@@ -17,7 +16,6 @@ export const authApi = apiSlice.injectEndpoints({
                 };
             },
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-                console.log(arg, "register Slice")
                 try {
                     const result = await queryFulfilled;
                     const authData = {
@@ -28,13 +26,12 @@ export const authApi = apiSlice.injectEndpoints({
                     dispatch(userLoggedIn({ ...authData }));
 
                 } catch (error) {
-                    console.log(error.data.error)
+                  toast.error("Error")
                 }
             }
         }),
         login: builder.mutation({
             query: ({ data }) => {
-                console.log(data, "from usersApi");
                 return {
                     url: "/login",
                     method: "POST",
@@ -42,10 +39,8 @@ export const authApi = apiSlice.injectEndpoints({
                 };
             },
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-                console.log(arg, "login Slice")
                 try {
                     const result = await queryFulfilled;
-                    console.log(result, "from login request")
                     if (result?.data?.token) {
                         const authData = {
                             accessToken: result.data.token,
@@ -56,7 +51,7 @@ export const authApi = apiSlice.injectEndpoints({
                     }
 
                 } catch (error) {
-                   console.log(error,"from login error")
+                   toast.error("Error")
                 }
             }
         })

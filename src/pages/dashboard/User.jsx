@@ -22,7 +22,6 @@ export default function User() {
     const rightBtn = total_pages / 6
     const dispatch = useDispatch();
 
-    console.log({ userReducerData }, "useReducerData");
     const controlModal = () => {
         setOpened((prevState) => !prevState);
     };

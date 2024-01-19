@@ -65,9 +65,7 @@ const usersSlice = createSlice({
             toast.success("User deleted successfully")
         },
         editUser: (state, action) => {
-
             const editedUserIndex = state.allUserData.findIndex(user => user.id === action.payload.id);
-            console.log({ editedUserIndex, payload: action.payload.data })
             if (editedUserIndex !== -1) {
                 // If the user is found, updating the data
                 state.allUserData[editedUserIndex] = action.payload.data;

@@ -13,8 +13,6 @@ function useLoggedInCheck() {
     useEffect(() => {
         const userInfo = JSON.parse(localStorage.getItem("auth"));
         if (userInfo?.accessToken && userInfo?.user) {
-            console.log(userInfo, "userInfo")
-
             dispatch(userLoggedIn(userInfo))
             setLoginCheck(true)
         } else {
