@@ -33,7 +33,7 @@ function UserBody({ user }) {
                             </div>
                         </div>
                         <div>
-                            <div className="font-bold"> {first_name + last_name}</div>
+                            <div className="font-bold"> {first_name + " " + last_name}</div>
                             <div className="text-sm opacity-50">United States</div>
                         </div>
                     </div>

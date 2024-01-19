@@ -42,6 +42,7 @@ function AddUserModal({ open, control, setOpened }) {
                 onClick={control}
                 className="fixed min-h-full inset-0 w-full z-10 bg-black/50 cursor-pointer"
             ></div>
+            
                 <div className="rounded-lg w-[400px] lg:w-[600px] space-y-8 bg-white p-10 absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2">
 
                     <form className="relative mt-8 space-y-6" onSubmit={handleAddUser}>

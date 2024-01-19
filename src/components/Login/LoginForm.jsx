@@ -26,6 +26,7 @@ function LoginForm() {
             emailValidityChecking(event.target.value)
         }
     }
+
     const handleEmail = (email) => {
         const emailValidity = IsEmailValid(email);
         setValid(emailValidity);
