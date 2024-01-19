@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
-import { MdOutlineAlternateEmail } from "react-icons/md";
+import { useState } from "react";
 import { debounce } from "../../components/utils/Debounce";
 import isEmailValid from "../../components/utils/IsEmailValid";
-import "../../style/addUserModal.css"
-import { editUser } from "../../RTK/features/users/usersSlice";
+import { LiaUserSecretSolid } from "react-icons/lia";
+import { addUser } from "../../RTK/features/users/usersSlice";
 import { useDispatch } from "react-redux";
+import "../../style/addUserModal.css"
 
 /* eslint-disable react/prop-types */
-function AddUser({ user, open, control }) {
-    const [formData, setFormData] = useState({ ...user });
+function AddUserModal({ id, open, control, setOpened }) {
+    const [formData, setFormData] = useState({ id });
     const [valid, setValid] = useState(true);
+
     const inputStyle = "appearance-none h-14 relative block w-full px-3 py-2 border border-gray-700 placeholder-gray-500 text-lg text-gray-900 rounded-lg focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm"
 
     const dispatch = useDispatch();
@@ -30,8 +31,8 @@ function AddUser({ user, open, control }) {
 
     const handleAddUser = (event) => {
         event.preventDefault();
-
-        dispatch(editUser({ id: user?.id, data: formData }))
+        dispatch(addUser(formData))
+        setOpened(prev => !prev)
     }
 
     return (
@@ -40,10 +41,13 @@ function AddUser({ user, open, control }) {
                 onClick={control}
                 className="fixed min-h-full inset-0 w-full z-10 bg-black/50 cursor-pointer"
             ></div>
-                <div className="rounded-lg w-[400px] lg:w-[600px] space-y-8 bg-white p-10 absolute top-1/2 left-1/3 z-20 -translate-x-1/3 -translate-y-1/3">
+                <div className="rounded-lg w-[400px] lg:w-[600px] space-y-8 bg-white p-10 absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2">
 
                     <form className="relative mt-8 space-y-6" onSubmit={handleAddUser}>
-                        <h2 className="my-8 updateUserTitle">Update User</h2>
+                        <h2 className="my-8 updateUserTitle flex items-center space-x-2">
+                            <LiaUserSecretSolid />
+                            <span>Add User</span>
+                        </h2>
                         <input type="hidden" name="remember" value="true" />
 
                         <div>
@@ -108,14 +112,14 @@ function AddUser({ user, open, control }) {
 
                         <div>
                             <button type="submit" className="updateBtn">
-                                Update User
+                                Add User
                             </button>
                         </div>
                     </form>
-                    <button className="absolute top-4 right-4 rounded-lg btn btn-circle" onClick={control}>Close</button>
+                    <button className="absolute top-4 right-4 btn rounded-3xl hover:bg-red-300" onClick={control}>Close</button>
                 </div>
             </>)
     )
 }
 
-export default AddUser;
+export default AddUserModal;

@@ -3,7 +3,7 @@ import { BsTrash3 } from "react-icons/bs";
 import { BiEdit } from "react-icons/bi";
 import { useDispatch } from "react-redux";
 import { deleteUser } from "../../RTK/features/users/usersSlice";
-import AddUser from "./AddUser"
+import EditUserModal from "./EditUserModal"
 
 
 /* eslint-disable react/prop-types */
@@ -47,7 +47,7 @@ function UserBody({ user }) {
                     </div>
                 </td>
             </tr>
-            <AddUser open={opened} control={controlModal} user={user}/>
+            <EditUserModal open={opened} setOpened={setOpened} control={controlModal} user={user}/>
         </>
     )
 }

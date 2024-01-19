@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
 
 const initialState = {
     allUserData: [{
@@ -53,7 +54,8 @@ const usersSlice = createSlice({
             state.allUserData.push({ ...action.payload });
         },
         addUser: (state, action) => {
-            state.allUserData.push(action.payload);
+            const id = state.allUserData.length + 1
+            state.allUserData.push({ id, ...action.payload });
         },
         deleteUser: (state, action) => {
             state.allUserData = state.allUserData.filter(user => user.id !== action.payload)
@@ -62,12 +64,13 @@ const usersSlice = createSlice({
         editUser: (state, action) => {
 
             const editedUserIndex = state.allUserData.findIndex(user => user.id === action.payload.id);
-            console.log({editedUserIndex,payload:action.payload.data})
+            console.log({ editedUserIndex, payload: action.payload.data })
             if (editedUserIndex !== -1) {
                 // If the user is found, updating the data
                 state.allUserData[editedUserIndex] = action.payload.data;
+                toast.success("User details successfully updated!")
             } else {
-                console.error("User not found for editing");
+                toast.error("Updating error!")
             }
         }
 

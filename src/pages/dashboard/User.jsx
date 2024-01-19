@@ -8,25 +8,36 @@ import Pagination from "../../components/utils/Pagination";
 import { useDispatch, useSelector } from "react-redux";
 import { setPage } from "../../RTK/features/pagination/paginationSlice";
 import UserNavbar from "./UserNavbar";
-import { useEffect } from "react";
+import { FaUserPlus } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import AddUserModal from "./AddUserModal"
 
 export default function User() {
     const userReducerData = useSelector(state => state?.users?.allUserData);
     const { currentPage, pagiInfo } = useSelector(state => state.pagination) || {};
+    const [opened, setOpened] = useState(false);
     const { total_pages } = pagiInfo || {};
     const dispatch = useDispatch();
 
     console.log({ userReducerData }, "useReducerData");
-
-    // useEffect(() => {
-
-    // }, [userReducerData])
+    const controlModal = () => {
+        setOpened((prevState) => !prevState);
+    };
+    const handleAdd = () => {
+        controlModal()
+    }
+ 
 
     return (
         <>
             <UserNavbar />
             <div className="overflow-x-auto">
-                <h2 className="tableTitle">Users List</h2>
+                <div className="flex items-center justify-between">
+                    <h2 className="tableTitle">Users List</h2>
+                    <p className="flex items-center space-x-1 mr-4 bg-sky-300 rounded-lg p-3 cursor-pointer"
+                        onClick={() => handleAdd()}
+                    ><FaUserPlus /> <span>Add User</span></p>
+                </div>
                 <table className="table">
                     {/* head */}
                     <thead className="bg-gray-200 rounded-md">
@@ -51,6 +62,7 @@ export default function User() {
                     <kbd className={`kbd ${currentPage < total_pages ? "cursor-pointer bg-green-500" : "cursor-not-allowed"}`} onClick={() => currentPage < total_pages && dispatch(setPage(currentPage + 1))}><img src={Control_double_right} alt=">>" /></kbd>
                 </div>
             </div>
+            <AddUserModal open={opened} setOpened={setOpened} control={controlModal} />
         </>
     )
 }
