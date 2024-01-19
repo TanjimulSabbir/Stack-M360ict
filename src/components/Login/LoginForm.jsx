@@ -10,6 +10,7 @@ import { useLoginMutation } from "../../RTK/features/auth/authApi";
 import { useNavigate } from "react-router-dom";
 import Error from "../ui/Error";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 function LoginForm() {
     const [formData, setFormData] = useState({ email: "", password: "" });
@@ -17,6 +18,7 @@ function LoginForm() {
     const [open, setOpen] = useState(false);
     const [valid, setValid] = useState(true);
     const [login, { data: loginUser, isError, isLoading, error }] = useLoginMutation();
+    const userData = useSelector(state => state.auth) || {};
     const navigate = useNavigate();
 
     const handleFormData = (event) => {
@@ -47,11 +49,11 @@ function LoginForm() {
             toast.error(error.data.error)
         }
        
-        if (loginUser?.token) {
+        if (userData?.user?.email && userData?.accessToken) {
             navigate("/dashboard")
             toast.success("Login Successful")
         }
-    }, [loginUser, navigate, error, isError])
+    }, [loginUser, navigate, error, isError,userData])
 
     return (
         <form onSubmit={handleSubmit}>

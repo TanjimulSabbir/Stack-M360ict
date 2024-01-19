@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useLoginMutation, useRegisterMutation } from "../../RTK/features/auth/authApi";
 import { useSpecifiedUserQuery } from "../../RTK/features/users/usersApi";
 import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userLogOut } from "../../RTK/features/auth/authSlice";
 import Error from "../ui/Error";
 import { useNavigate } from "react-router-dom";
@@ -19,6 +19,7 @@ function LoginWithSocial() {
     const [register, { data: regData, isError: regError, isLoading: regLoading }] = useRegisterMutation();
     const [login, { data: logData, isError: logError, isLoading: logLoading }] = useLoginMutation();
     const [signInError, setSigninError] = useState(false);
+    const userAuthData = useSelector(state => state.auth) || {};
 
     const { data: isUserRegistered } = useSpecifiedUserQuery(signInData?.user?.email, { skip: !signInData?.user?.email });
     const dispatch = useDispatch();
@@ -37,8 +38,12 @@ function LoginWithSocial() {
     };
 
     useEffect(() => {
+        if (!signInData) {
+            return
+        }
         try {
             const { uid, displayName, email, photoURL, accessToken } = signInData || {};
+            console.log(signInData, "from signin")
 
             if (uid) {
                 const userData = { username: displayName, email, password: uid, avatar: photoURL };
@@ -52,24 +57,13 @@ function LoginWithSocial() {
             }
         } catch (error) {
             dispatch(userLogOut())
-            toast.error("Login error!");
+            toast.error("Login error");
         }
     }, [signInData, isUserRegistered, register, dispatch, login]);
 
     useEffect(() => {
-        if (regError || logError) {
-            setSigninError("Signin error!")
-            toast.error("Signin error!")
-        }
-        //  if user loggedin
-        if (logData?.token) {
-            navigate("/dashboard")
-            toast.success("Sign in successful")
-        }
-        //  if user registered
-        if (regData?.id) {
-            navigate("/dashboard")
-            toast.success("Sign in successful")
+        if (userAuthData?.accessToken) {
+            navigate("/dashbaord")
         }
     }, [regData, logData, regError, logError, signInError, navigate]);
 
@@ -90,7 +84,7 @@ function LoginWithSocial() {
                 </div>
             </div>
             {regLoading || logLoading && <p>Loading...</p>}
-            {signInError && <Error message={signInError&&signInData} />}
+            {signInError && <Error message={signInError && signInData} />}
         </>
     )
 }

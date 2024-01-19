@@ -1,16 +1,17 @@
 import toast from "react-hot-toast";
 import { apiSlice } from "../api/apiSlice";
 import { userLoggedIn } from "./authSlice";
+import { useNavigate } from "react-router-dom";
+import UseNavigateToDash from "../../../components/hooks/useNavigateToDash";
 
 
 export const authApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         register: builder.mutation({
             query: ({ data, accessToken }) => {
-                // "/register" api showing problem, but "/users" api giving success response. 
-                // for a successful response I'm using "/users" api
+
                 return {
-                    url: "/users",
+                    url: "/register",
                     method: "POST",
                     body: data
                 };
@@ -19,12 +20,12 @@ export const authApi = apiSlice.injectEndpoints({
                 try {
                     const result = await queryFulfilled;
                     const authData = {
-                        accessToken: arg.accessToken,
-                        user: result.data
+                        accessToken: result?.data?.token,
+                        user: arg.data
                     }
                     localStorage.setItem("auth", JSON.stringify({ ...authData }))
                     dispatch(userLoggedIn({ ...authData }));
-
+                    UseNavigateToDash()
                 } catch (error) {
                     toast.error("Error")
                 }
@@ -48,8 +49,9 @@ export const authApi = apiSlice.injectEndpoints({
                         }
                         localStorage.setItem("auth", JSON.stringify({ ...authData }))
                         dispatch(userLoggedIn({ ...authData }))
+                        UseNavigateToDash()
                     }
-                    
+
                 } catch (error) {
                     toast.error("Error")
                 }

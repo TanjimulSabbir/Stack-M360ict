@@ -27,7 +27,7 @@ export default function Dashboard() {
                     </div>
                     <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
 
-                    <ul className="menu p-4 w-80 min-h-full bg-gray-200 md:ml-12 pt-10 mt-20 rounded md:mt-0">
+                    <ul className="menu p-4 w-80 min-h-full bg-gray-200 md:bg-white md:ml-12 pt-10 mt-20 rounded md:mt-0">
                         {/* Sidebar content here */}
                         <li className={`menuHolder ${path === "/dashboard" && ""}`}>
                             <Link to="/dashboard" className="flex items-center space-x-2">

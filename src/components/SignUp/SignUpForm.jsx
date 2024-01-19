@@ -10,6 +10,7 @@ import { useRegisterMutation } from "../../RTK/features/auth/authApi";
 import toast from "react-hot-toast";
 import Error from "../ui/Error";
 import { FiUser } from "react-icons/fi";
+import { useSelector } from "react-redux";
 
 
 function SignUpForm() {
@@ -18,7 +19,7 @@ function SignUpForm() {
     const [open, setOpen] = useState(false);
     const [valid, setValid] = useState(true);
     const [register, { data: registerdUser, isError, isLoading, error }] = useRegisterMutation();
-
+    const userData = useSelector(state => state.auth) || {};
     const navigate = useNavigate();
 
     const handleFormData = (event) => {
@@ -43,10 +44,11 @@ function SignUpForm() {
 
     useEffect(() => {
         if (isError) {
-            setRegisterError(error.data.error)
-            toast.error(error.data.error)
+            setRegisterError(error?.data?.error)
+            toast.error(error?.data?.error)
         }
-        if (registerdUser?.id && registerdUser?.email) {
+        console.log({ registerdUser, userData, }, "registeredUSer")
+        if (userData?.user?.email && userData?.accessToken) {
             navigate("/dashboard")
             toast.success("Register Successful")
         }
@@ -104,7 +106,7 @@ function SignUpForm() {
                         onChange={(event) => handleFormData(event)}
                         value={formData.password}
                         required
-                        // placeholder="password"
+                    // placeholder="password"
                     />
 
                     {/* password be showed or not be showed */}
@@ -122,9 +124,9 @@ function SignUpForm() {
 
                     {/* Form button */}
                     <div>
-                    <div>
-                        <button type="submit" className="signInBtn w-[260px] sm:w-[400px] md:[w-540px]" disabled={isLoading || !valid}> {isLoading ? "Loading..." : "Sign Up"}</button>
-                    </div>
+                        <div>
+                            <button type="submit" className="signInBtn w-[260px] sm:w-[400px] md:[w-540px]" disabled={isLoading || !valid}> {isLoading ? "Loading..." : "Sign Up"}</button>
+                        </div>
                     </div>
 
                     <p className="formFooter">Already have an account? <Link className="formFooterLink" to="/signin">Sign In</Link></p>
