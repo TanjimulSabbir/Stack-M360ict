@@ -51,7 +51,7 @@ function LoginForm() {
        
         if (userData?.user?.email && userData?.accessToken) {
             navigate("/dashboard")
-            toast.success("Login Successful")
+            toast.success("Login successful")
         }
     }, [loginUser, navigate, error, isError,userData])
 

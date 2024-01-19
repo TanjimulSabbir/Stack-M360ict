@@ -25,7 +25,6 @@ export const authApi = apiSlice.injectEndpoints({
                     }
                     localStorage.setItem("auth", JSON.stringify({ ...authData }))
                     dispatch(userLoggedIn({ ...authData }));
-                    UseNavigateToDash()
                 } catch (error) {
                     toast.error("Error")
                 }
@@ -49,7 +48,6 @@ export const authApi = apiSlice.injectEndpoints({
                         }
                         localStorage.setItem("auth", JSON.stringify({ ...authData }))
                         dispatch(userLoggedIn({ ...authData }))
-                        UseNavigateToDash()
                     }
 
                 } catch (error) {
