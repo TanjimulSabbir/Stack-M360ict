@@ -34,8 +34,6 @@ function LoginWithSocial() {
             console.log("first Step-Google login", { googleSIgnData: data })
         } catch (error) {
             toast.error("Login error");
-            // setSigninError(error.data)
-            console.log(error);
         }
     };
 
@@ -56,8 +54,6 @@ function LoginWithSocial() {
         } catch (error) {
             dispatch(userLogOut())
             toast.error("Login error!");
-            // setSigninError(error.data)
-            console.error({ error });
         }
     }, [signInData, isUserRegistered, register, dispatch, login]);
 
@@ -66,14 +62,15 @@ function LoginWithSocial() {
             setSigninError("Signin error!")
             toast.error("Signin error!")
         }
+        //  if user loggedin
         if (logData?.token) {
             navigate("/dashboard")
-            toast.success("Sign in successful!")
+            toast.success("Sign in successful")
         }
-        console.log(regData, "regData")
+        //  if user registered
         if (regData?.id) {
             navigate("/dashboard")
-            toast.success("Sign in successful!")
+            toast.success("Sign in successful")
         }
     }, [regData, logData, regError, logError, signInError, navigate]);
 
@@ -94,7 +91,7 @@ function LoginWithSocial() {
                 </div>
             </div>
             {regLoading || logLoading && <p>Loading...</p>}
-            {signInError && <Error message={signInError} />}
+            {signInError && <Error message={signInError&&signInData} />}
         </>
     )
 }
