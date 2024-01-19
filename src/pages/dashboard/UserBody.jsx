@@ -43,7 +43,7 @@ function UserBody({ user }) {
                     </div>
                 </td>
             </tr>
-            {modalOpen && <AddUser setModalOpen={setModalOpen}/>}
+            {modalOpen && <AddUser user={user} setModalOpen={setModalOpen}/>}
         </>
     )
 }
