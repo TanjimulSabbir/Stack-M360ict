@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
+import { v4 as uuidv4 } from 'uuid';
 
 const initialState = {
     allUserData: [{
@@ -54,7 +55,7 @@ const usersSlice = createSlice({
             state.allUserData.push({ ...action.payload });
         },
         addUser: (state, action) => {
-            const id = state.allUserData.length + 1
+            const id = uuidv4();
             state.allUserData.push({ id, ...action.payload });
         },
         deleteUser: (state, action) => {
