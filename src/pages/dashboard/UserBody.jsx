@@ -21,6 +21,11 @@ function UserBody({ user }) {
         controlModal()
     }
 
+    if (!user) {
+        return <p className="text-center text-black">No user found!</p>
+    }
+
+
     return (
         <>
             <tr>
@@ -29,7 +34,7 @@ function UserBody({ user }) {
                     <div className="flex items-center gap-3">
                         <div className="avatar">
                             <div className="mask mask-squircle w-12 h-12">
-                                <img src={avatar || gravatarUrl(email, { size: 80 })} />
+                                <img src={avatar || email && gravatarUrl(email, { size: 80 })} />
                             </div>
                         </div>
                         <div>

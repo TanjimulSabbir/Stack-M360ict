@@ -20,7 +20,7 @@ function useLoggedInCheck() {
         } else {
             return navigate("/signin")
         }
-    }, [dispatch])
+    }, [dispatch, navigate])
 
     return loginCheck;
 }

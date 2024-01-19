@@ -113,7 +113,7 @@ function AddUserModal({ open, control, setOpened }) {
                         </div>
 
                         <div>
-                            <button type="submit" className="updateBtn">
+                            <button type="submit" className={`updateBtn ${!valid && "errorBtn"}`} disabled={!valid}>
                                 Add User
                             </button>
                         </div>

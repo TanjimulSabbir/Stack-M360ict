@@ -111,7 +111,7 @@ function EditUserModal({ user, open, control, setOpened }) {
                         </div>
 
                         <div>
-                            <button type="submit" className="updateBtn">
+                            <button type="submit" className={`updateBtn ${!valid && "errorBtn"}`} disabled={!valid}>
                                 Update User
                             </button>
                         </div>
