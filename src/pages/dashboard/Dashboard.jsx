@@ -9,7 +9,7 @@ export default function Dashboard() {
     const path = useLocation().pathname;
     console.log(path, "path")
     return (
-        <div>
+        <>
             <div className="drawer lg:drawer-open">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content">
@@ -49,6 +49,6 @@ export default function Dashboard() {
                     </ul>
                 </div>
             </div>
-        </div>
+        </>
     )
 }

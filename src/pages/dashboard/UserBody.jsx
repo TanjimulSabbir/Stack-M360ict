@@ -8,12 +8,16 @@ import AddUser from "./AddUser"
 
 /* eslint-disable react/prop-types */
 function UserBody({ user }) {
-    const [modalOpen, setModalOpen] = useState(false)
+    const [opened, setOpened] = useState(false);
     const { id, email, first_name, last_name, avatar } = user;
     const dispatch = useDispatch();
 
+
+    const controlModal = () => {
+        setOpened((prevState) => !prevState);
+    };
     const handleEdit = () => {
-        setModalOpen(true)
+        controlModal()
     }
 
     return (
@@ -43,7 +47,7 @@ function UserBody({ user }) {
                     </div>
                 </td>
             </tr>
-            {modalOpen && <AddUser user={user} setModalOpen={setModalOpen}/>}
+            <AddUser open={opened} control={controlModal} user={user}/>
         </>
     )
 }

@@ -18,9 +18,9 @@ export default function User() {
 
     console.log({ userReducerData }, "useReducerData");
 
-    useEffect(() => {
+    // useEffect(() => {
 
-    }, [userReducerData])
+    // }, [userReducerData])
 
     return (
         <>

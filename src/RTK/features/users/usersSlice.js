@@ -60,9 +60,16 @@ const usersSlice = createSlice({
             console.log({ data: JSON.stringify(state.allUserData), payload: action.payload })
         },
         editUser: (state, action) => {
-            state.allUserData = state.allUserData.filter(user => user.id !== action.payload.id);
-            state.allUserData = state.allUserData.push(action.payload.data)
-        },
+            const editedUserIndex = state.allUserData.findIndex(user => user.id === action.payload.id);
+
+            if (editedUserIndex !== -1) {
+                // If the user is found, updating the data
+                state.allUserData[editedUserIndex] = action.payload.data;
+            } else {
+                console.error("User not found for editing");
+            }
+        }
+
     }
 });
 
