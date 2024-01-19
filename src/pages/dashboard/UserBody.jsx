@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsTrash3 } from "react-icons/bs";
 import { BiEdit } from "react-icons/bi";
 import { useDispatch } from "react-redux";
 import { deleteUser } from "../../RTK/features/users/usersSlice";
 import EditUserModal from "./EditUserModal"
+import gravatarUrl from "gravatar-url";
 
 
 /* eslint-disable react/prop-types */
@@ -28,7 +29,7 @@ function UserBody({ user }) {
                     <div className="flex items-center gap-3">
                         <div className="avatar">
                             <div className="mask mask-squircle w-12 h-12">
-                                <img src={avatar} />
+                                <img src={avatar || gravatarUrl(email, { size: 80 })} />
                             </div>
                         </div>
                         <div>
@@ -47,7 +48,7 @@ function UserBody({ user }) {
                     </div>
                 </td>
             </tr>
-            <EditUserModal open={opened} setOpened={setOpened} control={controlModal} user={user}/>
+            <EditUserModal open={opened} setOpened={setOpened} control={controlModal} user={user} />
         </>
     )
 }

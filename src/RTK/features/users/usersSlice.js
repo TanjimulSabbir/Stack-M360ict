@@ -55,12 +55,14 @@ const usersSlice = createSlice({
             state.allUserData.push({ ...action.payload });
         },
         addUser: (state, action) => {
-            const id = uuidv4();
+            const maxId = Math.max(...state.allUserData.map(user => user.id), 0);
+            const id = maxId + 1;
             state.allUserData.push({ id, ...action.payload });
+            toast.success("User added successfully!")
         },
         deleteUser: (state, action) => {
             state.allUserData = state.allUserData.filter(user => user.id !== action.payload)
-            console.log({ data: JSON.stringify(state.allUserData), payload: action.payload })
+            toast.success("User deleted successfully!")
         },
         editUser: (state, action) => {
 
