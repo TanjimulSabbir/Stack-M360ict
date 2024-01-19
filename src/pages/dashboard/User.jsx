@@ -29,10 +29,9 @@ export default function User() {
     }
 
     useEffect(() => {
-        setPaginatinUserData(userReducerData.slice((currentPage * 6) - 6, currentPage * 6))
+        setPaginatinUserData(userReducerData?.slice((currentPage * 6) - 6, currentPage * 6))
     }, [currentPage, userReducerData])
 
-    console.log(paginatinUserData, "from user pagination")
     return (
         <>
             <UserNavbar />
