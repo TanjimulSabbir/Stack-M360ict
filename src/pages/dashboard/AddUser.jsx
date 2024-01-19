@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import { debounce } from "../../components/utils/Debounce";
 import isEmailValid from "../../components/utils/IsEmailValid";
+import "../../style/addUserModal.css"
 
 /* eslint-disable react/prop-types */
 function AddUser({ user, setModalOpen }) {
     const [formData, setFormData] = useState({ ...user });
     const [valid, setValid] = useState(true);
-
+    const inputStyle = "appearance-none h-14 relative block w-full px-3 py-2 border border-gray-700 placeholder-gray-500 text-lg text-gray-900 rounded-lg focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm"
 
     const handleFormData = (event) => {
         setFormData(prev => ({ ...prev, [event.target.name]: event.target.value }));
@@ -35,32 +36,15 @@ function AddUser({ user, setModalOpen }) {
     return (
         <>
             <button className="btn">open modal</button>
-            <dialog id="addUserModal" className="modal modal-bottom sm:modal-middle">
+            <dialog id="addUserModal" className="modal modal-bottom sm:modal-middle w-full">
                 <div className="modal-box">
                     <form className="mt-8 space-y-6" onSubmit={handleAddUser}>
+                        <h2 className="my-8 updateUserTitle">Update User</h2>
                         <input type="hidden" name="remember" value="true" />
-                        <div className="relative">
-                            {
-                                formData?.email !== "" ||
-                                <div className="absolute top-3 left-4 flex items-center space-x-1">
-                                    <MdOutlineAlternateEmail className="placeHolderIcon" />
-                                    <span className="label">Your Email</span>
-                                </div>
-                            }
-
-                            <input type="text"
-                                className={`inputBox min-w-[260px] md:w-auto ${valid || "invalidEmailInput"}`}
-                                name="email"
-                                onChange={(event) => handleFormData(event)}
-                                required
-                                value={formData?.email}
-                            />
-                            {valid || <small className="invalidEmailError block text-start">Please enter a valid email address.</small>}
-                        </div>
 
                         <div>
-                            <label htmlFor="first_name" className="sr-only">
-                                First Name
+                            <label htmlFor="first_name" className="labelInput">
+                                First name
                             </label>
                             <input
                                 onChange={(event) => handleFormData(event)}
@@ -68,14 +52,14 @@ function AddUser({ user, setModalOpen }) {
                                 name="first_name"
                                 type="text"
                                 required
-                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm"
-                                placeholder="Message"
+                                className={`${inputStyle}`}
+                                placeholder="First name"
                                 value={formData?.first_name}
                             />
                         </div>
                         <div>
-                            <label htmlFor="last_name" className="sr-only">
-                                Last Name
+                            <label htmlFor="last_name" className="labelInput">
+                                Last name
                             </label>
                             <input
                                 onChange={(event) => handleFormData(event)}
@@ -83,17 +67,43 @@ function AddUser({ user, setModalOpen }) {
                                 name="last_name"
                                 type="text"
                                 required
-                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm"
-                                placeholder="Message"
+                                className={`${inputStyle}`}
+                                placeholder="Last name"
                                 value={formData?.last_name}
+                            />
+                        </div>
+                        <div className="relative">
+                            <label htmlFor="email" className="labelInput">
+                                Email
+                            </label>
+
+                            <input type="text"
+                                className={`${inputStyle} ${valid || "invalidEmailInput"}`}
+                                name="email"
+                                onChange={(event) => handleFormData(event)}
+                                required
+                                value={formData?.email}
+                            />
+                            {valid || <small className="invalidEmailError block text-start">Please enter a valid email address.</small>}
+                        </div>
+                        <div>
+                            <label htmlFor="avatar" className="labelInput">
+                                Avatar
+                            </label>
+                            <input
+                                onChange={(event) => handleFormData(event)}
+                                id="avatar"
+                                name="avatar"
+                                type="text"
+                                required
+                                className={`${inputStyle}`}
+                                placeholder="Avatar"
+                                value={formData?.avatar}
                             />
                         </div>
 
                         <div>
-                            <button
-                                type="submit"
-                                className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white  transition-all duration-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500`}
-                            >
+                            <button type="submit" className="updateBtn">
                                 Update User
                             </button>
                         </div>
@@ -102,7 +112,7 @@ function AddUser({ user, setModalOpen }) {
 
                     <div className="modal-action">
                         <form method="dialog">
-                            <button onClick={() => setModalOpen(false)} className="btn">Close</button>
+                            <button onClick={() => setModalOpen(false)} className="btn btn-sm btn-circle bg-red-500 hover:bg-red-600 absolute right-2 top-7">✕</button>
                         </form>
                     </div>
                 </div >
