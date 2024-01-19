@@ -42,8 +42,8 @@ function SignUpForm() {
 
     useEffect(() => {
         if (isError) {
-            setRegisterError(error.data)
-            toast.error(error.data)
+            setRegisterError(error.data.error)
+            toast.error(error.data.error)
         }
         if (registerdUser?.id && registerdUser?.email) {
             navigate("/dashboard")
