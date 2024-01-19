@@ -15,6 +15,7 @@ import AddUserModal from "./AddUserModal"
 export default function User() {
     const userReducerData = useSelector(state => state?.users?.allUserData);
     const { currentPage, pagiInfo } = useSelector(state => state.pagination) || {};
+    const [paginatinUserData, setPaginatinUserData] = useState([]);
     const [opened, setOpened] = useState(false);
     const { total_pages } = pagiInfo || {};
     const dispatch = useDispatch();
@@ -26,8 +27,12 @@ export default function User() {
     const handleAdd = () => {
         controlModal()
     }
- 
 
+    useEffect(() => {
+        setPaginatinUserData(userReducerData.slice((currentPage * 6) - 6, currentPage * 6))
+    }, [currentPage, userReducerData])
+
+    console.log(paginatinUserData, "from user pagination")
     return (
         <>
             <UserNavbar />
@@ -49,7 +54,7 @@ export default function User() {
                         </tr>
                     </thead>
                     <tbody>
-                        {userReducerData?.map(user => <UserBody key={user.id} user={user} />)}
+                        {paginatinUserData?.map(user => <UserBody key={user.id} user={user} />)}
                     </tbody>
                 </table>
                 <div className="join space-x-2 mt-12 mb-8">
