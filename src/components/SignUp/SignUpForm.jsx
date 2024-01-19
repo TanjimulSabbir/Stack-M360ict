@@ -47,7 +47,7 @@ function SignUpForm() {
         }
         if (registerdUser?.id && registerdUser?.email) {
             navigate("/dashboard")
-            toast.success("Register Successful!")
+            toast.success("Register Successful")
         }
     }, [registerdUser, navigate, error, isError])
 

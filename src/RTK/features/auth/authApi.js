@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { apiSlice } from "../api/apiSlice";
 import { userLoggedIn } from "./authSlice";
 
@@ -8,13 +9,13 @@ export const authApi = apiSlice.injectEndpoints({
             query: ({ data, accessToken }) => {
                 console.log(data, "from usersApi");
                 return {
-                    url: "/users",
+                    url: "/register",
                     method: "POST",
                     body: data
                 };
             },
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-                console.log(arg, "login Slice")
+                console.log(arg, "register Slice")
                 try {
                     const result = await queryFulfilled;
                     const authData = {
@@ -42,14 +43,18 @@ export const authApi = apiSlice.injectEndpoints({
                 console.log(arg, "login Slice")
                 try {
                     const result = await queryFulfilled;
-                    const authData = {
-                        accessToken: result.data.token,
-                        user: arg
+                    console.log(result, "from login request")
+                    if (result?.data?.token) {
+                        const authData = {
+                            accessToken: result.data.token,
+                            user: arg.data
+                        }
+                        localStorage.setItem("auth", JSON.stringify({ ...authData }))
+                        dispatch(userLoggedIn({ ...authData }))
                     }
-                    localStorage.setItem("auth", JSON.stringify({ ...authData }))
-                    dispatch(userLoggedIn({ ...authData }))
+
                 } catch (error) {
-                    console.log(error.message)
+                   console.log(error,"from login error")
                 }
             }
         })

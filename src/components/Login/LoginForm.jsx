@@ -43,16 +43,17 @@ function LoginForm() {
 
     useEffect(() => {
         if (isError) {
-            setLoginError(error.data)
-            toast.error(error.data)
+            setLoginError(error.data.error)
+            toast.error(error.data.error)
         }
-        console.log(loginUser, "LoginUser");
+        console.log(error, "error");
 
         if (loginUser?.token) {
             navigate("/dashboard")
             toast.success("Login Successful!")
         }
     }, [loginUser, navigate, error, isError])
+
     return (
         <form onSubmit={handleSubmit}>
             <div className="flex flex-col items-center space-y-12">

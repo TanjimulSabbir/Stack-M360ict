@@ -8,13 +8,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { userLogOut } from "../../RTK/features/auth/authSlice";
 
 function UserNavbar() {
-  const loggedInUser = useSelector(state => state.auth) || {};
+  // const loggedInUser = useSelector(state => state.auth);
   const userReducerData = useSelector(state => state?.users?.allUserData);
   const [matchedUser, setMatchedUser] = useState([]);
   const [inputText, setInputText] = useState();
-  const [showName, setShowName] = useState(false);
 
-  const { avatar, email, first_name, last_name } = loggedInUser?.user.data || {};
+  const localData = JSON.parse(localStorage.getItem("auth"));
+  const loggedInUser = localData?.user
+
+  const { avatar, email } = loggedInUser || {};
 
 
   const handleUserSearch = (searchText) => {
@@ -35,6 +37,7 @@ function UserNavbar() {
     navigate("/signin")
   }
 
+
   return (
     <div className="relative flex items-center justify-between mt-6">
       {/* Left part of userNavbar or Search Input Box */}
@@ -51,10 +54,9 @@ function UserNavbar() {
         <div>
           <ul className="menu menu-horizontal rounded-box flex items-center">
             <li>
-              {email ? <p className="cursor-pointer" onClick={() => handleLogout()}>
+              {loggedInUser && email ? <p className="cursor-pointer" onClick={() => handleLogout()}>
                 Logout</p> :
-
-                <Link to="/signin" className="cursor-pointer" >Login</Link>}
+                <Link to="/signin" className="cursor-pointer">Login</Link>}
             </li>
             <li>
               <img className="cursor-pointer" src={notificationBell} alt="notificatin_bell" />
@@ -62,7 +64,7 @@ function UserNavbar() {
             <li>
               <div className="dropdown dropdown-end">
                 <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                  <img className="shrink-0 h-10 w-10 rounded-full cursor-pointer" src={avatar || gravatarUrl(email, { size: 80 })} alt="" />
+                  <img className="shrink-0 h-10 w-10 rounded-full cursor-pointer" src={avatar || email && gravatarUrl(email, { size: 80 })} alt="" />
                 </div>
               </div>
             </li>

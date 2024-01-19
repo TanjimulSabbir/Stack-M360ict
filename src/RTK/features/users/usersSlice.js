@@ -58,11 +58,11 @@ const usersSlice = createSlice({
             const maxId = Math.max(...state.allUserData.map(user => user.id), 0);
             const id = maxId + 1;
             state.allUserData.push({ id, ...action.payload });
-            toast.success("User added successfully!")
+            toast.success("User added successfully")
         },
         deleteUser: (state, action) => {
             state.allUserData = state.allUserData.filter(user => user.id !== action.payload)
-            toast.success("User deleted successfully!")
+            toast.success("User deleted successfully")
         },
         editUser: (state, action) => {
 
@@ -71,9 +71,9 @@ const usersSlice = createSlice({
             if (editedUserIndex !== -1) {
                 // If the user is found, updating the data
                 state.allUserData[editedUserIndex] = action.payload.data;
-                toast.success("User details successfully updated!")
+                toast.success("User details successfully updated")
             } else {
-                toast.error("Updating error!")
+                toast.error("Updating error")
             }
         }
 
