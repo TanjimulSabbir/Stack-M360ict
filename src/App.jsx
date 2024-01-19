@@ -6,7 +6,7 @@ import Layout from './layout/Layout';
 function App() {
   useLoggedInCheck()
   return (
-    <div className='min-h-screen'>
+    <div className='min-h-screen max-w-[1500px] mx-auto'>
       <Navbar />
       <Layout />
     </div>
