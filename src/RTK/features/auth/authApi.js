@@ -6,7 +6,7 @@ import { userLoggedIn } from "./authSlice";
 export const authApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         register: builder.mutation({
-            query: ({ data,accessToken }) => {
+            query: ({ data, accessToken }) => {
                 // "/register" api showing problem, but "/users" api giving success response. 
                 // for a successful response I'm using "/users" api
                 return {
@@ -26,7 +26,7 @@ export const authApi = apiSlice.injectEndpoints({
                     dispatch(userLoggedIn({ ...authData }));
 
                 } catch (error) {
-                  toast.error("Error")
+                    toast.error("Error")
                 }
             }
         }),
@@ -49,9 +49,9 @@ export const authApi = apiSlice.injectEndpoints({
                         localStorage.setItem("auth", JSON.stringify({ ...authData }))
                         dispatch(userLoggedIn({ ...authData }))
                     }
-
+                    
                 } catch (error) {
-                   toast.error("Error")
+                    toast.error("Error")
                 }
             }
         })
