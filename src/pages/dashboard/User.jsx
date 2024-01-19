@@ -19,6 +19,7 @@ export default function User() {
     const [opened, setOpened] = useState(false);
     // const { total_pages } = pagiInfo || {};
     const total_pages = userReducerData?.length
+    const rightBtn = total_pages / 6
     const dispatch = useDispatch();
 
     console.log({ userReducerData }, "useReducerData");
@@ -60,13 +61,15 @@ export default function User() {
 
                 {/* Pagination */}
                 <div className="join space-x-2 mt-12 mb-8">
-                    <kbd className={`kbd ${currentPage > 1 ? "cursor-pointer bg-green-500" : "cursor-not-allowed"}`} onClick={() => currentPage > 1 && dispatch(setPage(currentPage - 1))}><img src={control_double_left} alt="<<" /></kbd>
+                    <kbd className={`kbd ${currentPage > 1 ? "cursor-pointer bg-green-500" : "cursor-not-allowed"}`} 
+                    onClick={() => currentPage > 1 && dispatch(setPage(currentPage - 1))}><img src={control_double_left} alt="<<" /></kbd>
 
                     <kbd className="kbd"><img src={Control_single_left} alt="<" /></kbd>
                     <Pagination />
                     <kbd className="kbd"><img src={Control_single_right} alt=">" /></kbd>
 
-                    <kbd className={`kbd ${currentPage < total_pages ? "cursor-pointer bg-green-500" : "cursor-not-allowed"}`} onClick={() => currentPage < total_pages && dispatch(setPage(currentPage + 1))}><img src={Control_double_right} alt=">>" /></kbd>
+                    <kbd className={`kbd ${currentPage < total_pages / 6 ? "cursor-pointer bg-green-500" : "cursor-not-allowed"}`} 
+                    onClick={() => currentPage < rightBtn && dispatch(setPage(currentPage + 1))}><img src={Control_double_right} alt=">>" /></kbd>
                 </div>
             </div>
             <AddUserModal open={opened} setOpened={setOpened} control={controlModal} />

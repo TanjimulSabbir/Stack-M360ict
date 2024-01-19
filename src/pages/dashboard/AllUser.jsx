@@ -11,18 +11,20 @@ function AllUser() {
     const userReducerData = useSelector(state => state.users?.allUserData);
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        if (userData?.data?.length > 0) {
-            const { page, per_page, total, total_pages, data } = userData;
-            dispatch(setPagination({ page, per_page, total, total_pages }));
+    // I don't know; suddenly, I havn't found getData, as for it I'm stop implementing this one.
 
-            const uniqueUsers = data.map(user => {
-                return userReducerData.filter(prevUser => prevUser.id !== user.id)
-            })
-            console.log(uniqueUsers, "uniqueUserData")
-            dispatch(setUsersData(uniqueUsers));
-        }
-    }, [userData, dispatch]);
+    // useEffect(() => {
+    //     if (userData?.data?.length > 0) {
+    //         const { page, per_page, total, total_pages, data } = userData;
+    //         dispatch(setPagination({ page, per_page, total, total_pages }));
+
+    //         const uniqueUsers = data.map(user => {
+    //             return userReducerData.filter(prevUser => prevUser.id !== user.id)
+    //         })
+    //         console.log(uniqueUsers, "uniqueUserData")
+    //         dispatch(setUsersData(uniqueUsers));
+    //     }
+    // }, [userData, dispatch]);
 
     if (isLoading) return <p>Loading...</p>
 

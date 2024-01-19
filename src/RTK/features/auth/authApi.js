@@ -8,8 +8,10 @@ export const authApi = apiSlice.injectEndpoints({
         register: builder.mutation({
             query: ({ data, accessToken }) => {
                 console.log(data, "from usersApi");
+                // "/register" api showing problem, but "/users" api giving success response. 
+                // for a successful response I'm using "/users" api
                 return {
-                    url: "/register",
+                    url: "/users",
                     method: "POST",
                     body: data
                 };

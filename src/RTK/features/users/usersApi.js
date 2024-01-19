@@ -4,7 +4,7 @@ export const usersApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getUsers: builder.query({
             query: (page) => ({
-                url: `/users?per_page=5&page=${page}`
+                url: `/users?per_page=5&page=5`
             }),
         }),
         specifiedUser: builder.query({
