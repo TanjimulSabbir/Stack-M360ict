@@ -53,17 +53,18 @@ const usersSlice = createSlice({
             state.allUserData.push({ ...action.payload });
         },
         addUser: (state, action) => {
-            return state.allUserData.push(action.payload);
+            state.allUserData.push(action.payload);
         },
         deleteUser: (state, action) => {
-            return state.allUserData.filter(user => user.id !== action.payload)
+            state.allUserData = state.allUserData.filter(user => user.id !== action.payload)
+            console.log({ data: JSON.stringify(state.allUserData), payload: action.payload })
         },
         editUser: (state, action) => {
-            state.allUserData.filter(user => user.id !== action.payload.id);
-            return state.allUserData.push(action.payload.data)
+            state.allUserData = state.allUserData.filter(user => user.id !== action.payload.id);
+            state.allUserData = state.allUserData.push(action.payload.data)
         },
     }
 });
 
-export const { setUsersData } = usersSlice.actions;
+export const { setUsersData, addUser, deleteUser, editUser } = usersSlice.actions;
 export default usersSlice.reducer;
