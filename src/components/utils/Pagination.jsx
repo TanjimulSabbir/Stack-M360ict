@@ -2,11 +2,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setPage } from '../../RTK/features/pagination/paginationSlice';
 
 const Pagination = () => {
+    const userReducerData = useSelector(state => state?.users?.allUserData);
     const { currentPage, pagiInfo } = useSelector(state => state.pagination);
-
+    const total = userReducerData?.length 
     // Destructure with default values and check if data is not null
-    const { per_page, total } = pagiInfo || {};
-    const totalPages = Math.ceil(total / per_page);
+    // const { per_page, total } = pagiInfo || {};
+    const totalPages = Math.ceil(total / 6);
     const dispatch = useDispatch();
 
 
