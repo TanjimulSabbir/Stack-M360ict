@@ -10,9 +10,10 @@ function UserNavbar() {
   const userReducerData = useSelector(state => state?.users?.allUserData);
   const [matchedUser, setMatchedUser] = useState([]);
   const [inputText, setInputText] = useState();
+  const [showName, setShowName] = useState(false);
 
-  const { avatar } = loggedInUser?.user || {};
-  console.log({loggedInUser})
+  const { avatar, email, first_name, last_name } = loggedInUser?.user.data || {};
+
 
   const handleUserSearch = (searchText) => {
     setInputText(searchText)
@@ -34,7 +35,11 @@ function UserNavbar() {
       </div>
       <div className="flex items-center justify-center space-x-8 mr-4">
         <img className="cursor-pointer" src={notificationBell} alt="notificatin_bell" />
-        <img className="shrink-0 h-10 w-10 rounded-full" src={avatar && avatar} alt="" />
+        <div onClick={() => setShowName(!showName)} className="relative">
+          <img className="shrink-0 h-10 w-10 rounded-full cursor-pointer" src={avatar || gravatarUrl(email, { size: 80 })} alt="" />
+          {showName && <p className="bg-black text-white mt-2 rounded p-2 absolute right-4">
+            {first_name && first_name + " " + last_name && last_name}</p>}
+        </div>
       </div>
 
       {/* User Filtering Result */}
