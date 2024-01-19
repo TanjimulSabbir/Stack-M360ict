@@ -1,12 +1,15 @@
 import { BsTrash3 } from "react-icons/bs";
 import { BiEdit } from "react-icons/bi";
 import { useDeleteUserMutation } from "../../RTK/features/users/usersApi";
+import { apiSlice } from "../../RTK/features/api/apiSlice";
+import { useDispatch } from "react-redux";
 
 
 /* eslint-disable react/prop-types */
 function UserBody({ user }) {
     const { id, email, first_name, last_name, avatar } = user;
     const [deleteUser, { isLoading }] = useDeleteUserMutation();
+    const dispatch = useDispatch();
     return (
         <tr>
             <th>{id}</th>

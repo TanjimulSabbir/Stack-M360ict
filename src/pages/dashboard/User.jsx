@@ -8,12 +8,20 @@ import Pagination from "../../components/utils/Pagination";
 import { useDispatch, useSelector } from "react-redux";
 import { setPage } from "../../RTK/features/pagination/paginationSlice";
 import UserNavbar from "./UserNavbar";
+import { useEffect } from "react";
 
-export default function User({ users }) {
+export default function User() {
+    const userReducerData = useSelector(state => state?.users?.allUserData);
     const { currentPage, pagiInfo } = useSelector(state => state.pagination) || {};
     const { total_pages } = pagiInfo || {};
     const dispatch = useDispatch();
-    
+
+    console.log({ userReducerData }, "useReducerData");
+
+    useEffect(() => {
+
+    }, [userReducerData])
+
     return (
         <>
             <UserNavbar />
@@ -30,7 +38,7 @@ export default function User({ users }) {
                         </tr>
                     </thead>
                     <tbody>
-                        {users?.map(user => <UserBody key={user.id} user={user} />)}
+                        {userReducerData?.map(user => <UserBody key={user.id} user={user} />)}
                     </tbody>
                 </table>
                 <div className="join space-x-2 mt-12 mb-8">

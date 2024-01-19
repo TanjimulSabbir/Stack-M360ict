@@ -12,12 +12,6 @@ const paginationSlice = createSlice({
         setPagination: (state, action) => {
             state.pagiInfo = { ...action.payload }
         },
-        // pageIncrease: (state) => {
-        //     state.currentPage = state.currentPage + 1;
-        // },
-        // pageDecrease: (state) => {
-        //     state.currentPage = state.currentPage - 1;
-        // },
         setPage: (state, action) => {
             state.currentPage = action.payload;
         },

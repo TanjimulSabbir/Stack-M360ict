@@ -2,25 +2,33 @@ import { useGetUsersQuery } from "../../RTK/features/users/usersApi";
 import { useDispatch, useSelector } from "react-redux";
 import { setPagination } from "../../RTK/features/pagination/paginationSlice";
 import User from "./User";
+import { useEffect } from "react";
+import { setUsersData } from "../../RTK/features/users/usersSlice";
+import Error from "../../components/ui/Error";
 
 function AllUser() {
-    const page = useSelector(state => state.pagination.currentPage);
-    const { data: userData, isLoading, isError, error } = useGetUsersQuery(page);
+    const { data: userData, isLoading, isError, error } = useGetUsersQuery(5);
+    const userReducerData = useSelector(state => state.users?.allUserData);
     const dispatch = useDispatch();
-    console.log(userData);
 
-    let content = null;
-    if (isLoading) content = <p>Loading...</p>
-    if (!isLoading && isError) content = <p>{error?.message}</p>
-    if (!isLoading && !isError && userData?.data.length === 0) content = <p>No user found</p>
-    if (!isLoading && !isError && userData?.data.length > 0) {
-        const { page, per_page, total, total_pages } = userData;
-        dispatch(setPagination({ page, per_page, total, total_pages }));
-        content = <User users={userData.data} ></User>
-    }
+    useEffect(() => {
+        if (userData?.data?.length > 0) {
+            const { page, per_page, total, total_pages, data } = userData;
+            dispatch(setPagination({ page, per_page, total, total_pages }));
+
+            const uniqueUsers = data.map(user => {
+                return userReducerData.filter(prevUser => prevUser.id !== user.id)
+            })
+            console.log(uniqueUsers, "uniqueUserData")
+            dispatch(setUsersData(uniqueUsers));
+        }
+    }, [userData, dispatch]);
+
+    if (isLoading) return <p>Loading...</p>
+
     return (
         <div>
-            {content}
+            <User />
         </div>
     )
 }
