@@ -1,10 +1,10 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import searchIcon from "../../assets/searchIcon.svg"
 import notificationBell from "../../assets/notification-bell 1.svg"
 import { debounce } from "../../components/utils/Debounce";
 import { useState } from "react";
 import gravatarUrl from "gravatar-url";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { userLogOut } from "../../RTK/features/auth/authSlice";
 
 function UserNavbar() {
@@ -25,7 +25,15 @@ function UserNavbar() {
       setMatchedUser(matchedData)
     }
   }
-  const searchUser = debounce(handleUserSearch, 300)
+  const searchUser = debounce(handleUserSearch, 300);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(userLogOut());
+    navigate("/signup")
+  }
 
   return (
     <div className="relative flex items-center justify-between mt-6">
@@ -43,7 +51,10 @@ function UserNavbar() {
         <div>
           <ul className="menu menu-horizontal rounded-box flex items-center">
             <li>
-              <p className="cursor-pointer" onClick={() => userLogOut()}>{loggedInUser.email ? "Logout" : "Login"}</p>
+              {email ? <p className="cursor-pointer" onClick={() => handleLogout()}>
+                Logout</p> :
+
+                <Link to="/signup" className="cursor-pointer" >Login</Link>}
             </li>
             <li>
               <img className="cursor-pointer" src={notificationBell} alt="notificatin_bell" />
@@ -53,13 +64,6 @@ function UserNavbar() {
                 <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                   <img className="shrink-0 h-10 w-10 rounded-full cursor-pointer" src={avatar || gravatarUrl(email, { size: 80 })} alt="" />
                 </div>
-                <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                  <li>
-                    <a href="">
-                      {(first_name && first_name + " " + last_name && last_name) || "Name not found"}
-                    </a>
-                  </li>
-                </ul>
               </div>
             </li>
           </ul>

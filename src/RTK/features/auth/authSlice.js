@@ -17,6 +17,7 @@ const authSlice = createSlice({
         userLogOut: (state) => {
             state.user = undefined;
             state.accessToken = undefined;
+            localStorage.clear();
             toast.success("Logout Successful")
         }
     }

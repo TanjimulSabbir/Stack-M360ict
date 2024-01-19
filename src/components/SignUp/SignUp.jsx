@@ -5,7 +5,7 @@ import "../../style/signUp.scss"
 
 function SignUp() {
   return (
-    <div>
+    <div className="pb-10">
       <div className="loginTextHolder">
         <h2 className="signInText">Getting Started</h2>
         <p className="welcomeText">Create an account to continue!</p>

@@ -1,11 +1,11 @@
 import './App.css'
-import Login from './components/Login/Login';
+import Layout from './layout/Layout';
 
 function App() {
 
   return (
     <div className='min-h-screen'>
-      <Login />
+      <Layout />
     </div>
   )
 }

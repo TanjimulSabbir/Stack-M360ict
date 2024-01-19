@@ -9,30 +9,37 @@ import PrivateRoute from "../components/shared/PrivateRoute";
 
 const router = createBrowserRouter([{
     path: "/",
-    element: <Layout></Layout>,
+    element: <App />,
     children: [
         {
             path: "/",
-            element: <App />
-        },
-        {
-            path: "/signin",
-            element: <Login />
-        },
-        {
-            path: "/signup",
-            element: <SignUp />
-        },
-        {
-            path: "/dashboard",
-            element: <PrivateRoute> <Dashboard /></PrivateRoute>,
+            element: <Layout />,
             children: [
                 {
+                    path: "/",
+                    element: <SignUp />
+                },
+                {
+                    path: "/signin",
+                    element: <Login />
+                },
+                {
+                    path: "/signup",
+                    element: <SignUp />
+                },
+                {
                     path: "/dashboard",
-                    element: <PrivateRoute><AllUser /></PrivateRoute>,
-                }
+                    element: <PrivateRoute> <Dashboard /></PrivateRoute>,
+                    children: [
+                        {
+                            path: "/dashboard",
+                            element: <PrivateRoute><AllUser /></PrivateRoute>,
+                        }
+                    ]
+                },
             ]
         },
+
     ]
 }]);
 
