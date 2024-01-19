@@ -6,7 +6,7 @@ function Navbar() {
   const path = useLocation().pathname;
 
   return (
-    <div className={`flex items-center justify-between`}>
+    <div className={`flex items-center justify-between ${path == "/dashboard" && "hidden"}`}>
       <div className="ml-20 mt-6">
         <img src={logo} alt="logo" />
       </div>

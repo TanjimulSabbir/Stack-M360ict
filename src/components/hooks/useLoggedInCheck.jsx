@@ -18,7 +18,7 @@ function useLoggedInCheck() {
             dispatch(userLoggedIn(userInfo))
             setLoginCheck(true)
         } else {
-            return navigate("/signup")
+            return navigate("/signin")
         }
     }, [dispatch])
 

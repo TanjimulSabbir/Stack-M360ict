@@ -32,7 +32,7 @@ function UserNavbar() {
 
   const handleLogout = () => {
     dispatch(userLogOut());
-    navigate("/signup")
+    navigate("/signin")
   }
 
   return (
@@ -54,7 +54,7 @@ function UserNavbar() {
               {email ? <p className="cursor-pointer" onClick={() => handleLogout()}>
                 Logout</p> :
 
-                <Link to="/signup" className="cursor-pointer" >Login</Link>}
+                <Link to="/signin" className="cursor-pointer" >Login</Link>}
             </li>
             <li>
               <img className="cursor-pointer" src={notificationBell} alt="notificatin_bell" />

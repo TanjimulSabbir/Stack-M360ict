@@ -9,7 +9,7 @@ function Layout() {
 
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <Outlet />
       <Toaster position="top-center" />
     </div>
