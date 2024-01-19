@@ -125,7 +125,7 @@ function SignUpForm() {
                     {/* Form button */}
                     <div>
                         <div>
-                            <button type="submit" className="signInBtn w-[260px] sm:w-[400px] md:[w-540px]" disabled={isLoading || !valid}> {isLoading ? "Loading..." : "Sign Up"}</button>
+                            <button type="submit" className="signInBtn w-[260px] sm:w-[400px] md:w-[540px]" disabled={isLoading || !valid}> {isLoading ? "Loading..." : "Sign Up"}</button>
                         </div>
                     </div>
 

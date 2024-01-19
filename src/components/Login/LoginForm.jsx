@@ -107,7 +107,7 @@ function LoginForm() {
 
                     {/* Form button */}
                     <div>
-                        <button type="submit" className="signInBtn w-[260px] sm:w-[400px] md:[w-540px]" disabled={isLoading || !valid}> {isLoading ? "Loading..." : "Sign in"}</button>
+                        <button type="submit" className="signInBtn w-[260px] sm:w-[400px] md:w-[540px]" disabled={isLoading || !valid}> {isLoading ? "Loading..." : "Sign in"}</button>
                     </div>
                     <p className="formFooter">Don’t have an account yet? <Link className="formFooterLink" to="/signup">Sign Up</Link></p>
                 </div>
