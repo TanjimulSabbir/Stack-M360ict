@@ -15,10 +15,10 @@ function LoginWithSocial() {
     const btnStyle = "flex items-center space-x-2 bg-[#F0F5FA] rounded-3xl w-[255px] h-14 text-center justify-center"
     const [signInWithGoogle] = useSignInWithGoogle(auth);
     const [signInWithApple] = useSignInWithApple(auth);
-    const [signInData, setSiginData] = useState("");
-    const [register, { data: regData, isError: regError, isLoading: regLoading }] = useRegisterMutation();
-    const [login, { data: logData, isError: logError, isLoading: logLoading }] = useLoginMutation();
-    const [signInError, setSigninError] = useState(false);
+    const [signInData, setSiginData] = useState();
+    const [register, { data: regData, isError: regError, isLoading: regLoading, error }] = useRegisterMutation();
+    const [login, { data: logData, isError: logError, isLoading: logLoading, }] = useLoginMutation();
+    const [signInError, setSigninError] = useState("");
     const userAuthData = useSelector(state => state.auth) || {};
 
     const { data: isUserRegistered } = useSpecifiedUserQuery(signInData?.user?.email, { skip: !signInData?.user?.email });
@@ -62,6 +62,10 @@ function LoginWithSocial() {
     }, [signInData, isUserRegistered, register, dispatch, login]);
 
     useEffect(() => {
+        if (regError) {
+            setSigninError(error.data.error)
+            toast.error(error.data.error)
+        }
         if (userAuthData?.accessToken) {
             navigate("/dashbaord")
         }
@@ -84,7 +88,7 @@ function LoginWithSocial() {
                 </div>
             </div>
             {regLoading || logLoading && <p>Loading...</p>}
-            {signInError && <Error message={signInError && signInData} />}
+            {signInError !== "" && <Error message={signInError} />}
         </>
     )
 }

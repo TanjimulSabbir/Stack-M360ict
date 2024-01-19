@@ -26,7 +26,7 @@ export const authApi = apiSlice.injectEndpoints({
                     localStorage.setItem("auth", JSON.stringify({ ...authData }))
                     dispatch(userLoggedIn({ ...authData }));
                 } catch (error) {
-                    toast.error("Error")
+                    // toast.error("Error")
                 }
             }
         }),
@@ -51,7 +51,7 @@ export const authApi = apiSlice.injectEndpoints({
                     }
 
                 } catch (error) {
-                    toast.error("Error")
+                    // toast.error("Error")
                 }
             }
         })

@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 
 function LoginForm() {
     const [formData, setFormData] = useState({ email: "", password: "" });
-    const [loginError, setLoginError] = useState(false);
+    const [loginError, setLoginError] = useState("");
     const [open, setOpen] = useState(false);
     const [valid, setValid] = useState(true);
     const [login, { data: loginUser, isError, isLoading, error }] = useLoginMutation();
@@ -48,12 +48,12 @@ function LoginForm() {
             setLoginError(error.data.error)
             toast.error(error.data.error)
         }
-       
+
         if (userData?.user?.email && userData?.accessToken) {
             navigate("/dashboard")
             toast.success("Login successful")
         }
-    }, [loginUser, navigate, error, isError,userData])
+    }, [loginUser, navigate, error, isError, userData])
 
     return (
         <form onSubmit={handleSubmit}>
@@ -112,7 +112,7 @@ function LoginForm() {
                     <p className="formFooter">Don’t have an account yet? <Link className="formFooterLink" to="/signup">Sign Up</Link></p>
                 </div>
             </div>
-            {loginError && <Error message={loginError} />}
+            {loginError !== "" && <Error message={loginError} />}
         </form>
     );
 }

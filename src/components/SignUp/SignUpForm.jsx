@@ -15,7 +15,7 @@ import { useSelector } from "react-redux";
 
 function SignUpForm() {
     const [formData, setFormData] = useState({ email: "", name: "", password: "" });
-    const [registerError, setRegisterError] = useState(false);
+    const [registerError, setRegisterError] = useState("");
     const [open, setOpen] = useState(false);
     const [valid, setValid] = useState(true);
     const [register, { data: registerdUser, isError, isLoading, error }] = useRegisterMutation();
@@ -47,7 +47,6 @@ function SignUpForm() {
             setRegisterError(error?.data?.error)
             toast.error(error?.data?.error)
         }
-        console.log({ registerdUser, userData, }, "registeredUSer")
         if (userData?.user?.email && userData?.accessToken) {
             navigate("/dashboard")
             toast.success("Register Successful")
@@ -132,7 +131,7 @@ function SignUpForm() {
                     <p className="formFooter">Already have an account? <Link className="formFooterLink" to="/signin">Sign In</Link></p>
                 </div>
             </div>
-            {registerError && <Error message={registerError} />}
+            {registerError !== "" && <Error message={registerError} />}
         </form>
     );
 }

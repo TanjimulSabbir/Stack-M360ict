@@ -31,7 +31,7 @@ export default function User() {
 
     useEffect(() => {
         setPaginatinUserData(userReducerData?.slice((currentPage * 6) - 6, currentPage * 6))
-        console.log((currentPage * 6) - 6,"starting item")
+        // console.log((currentPage * 6) - 6,"starting item")
     }, [currentPage, userReducerData])
 
     return (
