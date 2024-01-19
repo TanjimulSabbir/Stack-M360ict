@@ -7,8 +7,8 @@ import { useDispatch } from "react-redux";
 import "../../style/addUserModal.css"
 
 /* eslint-disable react/prop-types */
-function AddUserModal({ id, open, control, setOpened }) {
-    const [formData, setFormData] = useState({ id });
+function AddUserModal({ open, control, setOpened }) {
+    const [formData, setFormData] = useState({ });
     const [valid, setValid] = useState(true);
 
     const inputStyle = "appearance-none h-14 relative block w-full px-3 py-2 border border-gray-700 placeholder-gray-500 text-lg text-gray-900 rounded-lg focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm"
