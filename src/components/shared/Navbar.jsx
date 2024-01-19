@@ -6,11 +6,11 @@ function Navbar() {
   const path = useLocation().pathname;
 
   return (
-    <div className={`flex items-center justify-between ${path == "/dashboard" && "hidden"}`}>
-      <div className="ml-20 mt-6">
+    <div className={`flex items-center justify-between ${path == "/dashboard" && "hidden"} mt-4 px-4 md:mt-0 md:px-0`}>
+      <div className="md:ml-20 md:mt-6">
         <img src={logo} alt="logo" />
       </div>
-      <div className={`mr-20 `}>
+      <div className={`md:mr-20 `}>
         <select className="selet w-full rounded-xl cursor-pointer">
           <option value="" disabled>Select Language</option>
           <option value="English(uk)">English(uk)</option>

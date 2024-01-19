@@ -49,7 +49,7 @@ function LoginForm() {
        
         if (loginUser?.token) {
             navigate("/dashboard")
-            toast.success("Login Successful!")
+            toast.success("Login Successful")
         }
     }, [loginUser, navigate, error, isError])
 
@@ -66,7 +66,7 @@ function LoginForm() {
                     }
 
                     <input type="text"
-                        className={`inputBox min-w-[260px] md:w-auto ${valid || "invalidEmailInput"}`}
+                        className={`inputBox ${valid || "invalidEmailInput"} min-w-[260px] sm:min-w-[400px] md:min-w-[540px]`}
                         name="email"
                         onChange={(event) => handleFormData(event)}
                         required
@@ -84,7 +84,7 @@ function LoginForm() {
                     }
 
                     <input type={open ? "text" : "password"}
-                        className="inputBox"
+                        className="inputBox min-w-[260px] sm:min-w-[400px] md:min-w-[540px]"
                         name="password"
                         onChange={(event) => handleFormData(event)}
                         required
@@ -105,7 +105,7 @@ function LoginForm() {
 
                     {/* Form button */}
                     <div>
-                        <button type="submit" className="signInBtn" disabled={isLoading || !valid}> {isLoading ? "Loading..." : "Sign in"}</button>
+                        <button type="submit" className="signInBtn w-[260px] sm:w-[400px] md:[w-540px]" disabled={isLoading || !valid}> {isLoading ? "Loading..." : "Sign in"}</button>
                     </div>
                     <p className="formFooter">Don’t have an account yet? <Link className="formFooterLink" to="/signup">Sign Up</Link></p>
                 </div>

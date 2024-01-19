@@ -9,6 +9,7 @@ import { debounce } from "../utils/Debounce";
 import { useRegisterMutation } from "../../RTK/features/auth/authApi";
 import toast from "react-hot-toast";
 import Error from "../ui/Error";
+import { FiUser } from "react-icons/fi";
 
 
 function SignUpForm() {
@@ -64,7 +65,7 @@ function SignUpForm() {
                     }
 
                     <input type="text"
-                        className={`inputBox min-w-[260px] md:w-auto ${valid || "invalidEmailInput"}`}
+                        className={`inputBox min-w-[260px] sm:min-w-[400px] md:min-w-[540px] ${valid || "invalidEmailInput"}`}
                         name="email"
                         onChange={(event) => handleFormData(event)}
                         required
@@ -76,13 +77,13 @@ function SignUpForm() {
                     {
                         formData?.name !== "" ||
                         <div className="absolute top-3 left-4 flex items-center space-x-1">
-                            <MdOutlineAlternateEmail className="placeHolderIcon" />
+                            <FiUser className="placeHolderIcon" />
                             <span className="label">Your Name</span>
                         </div>
                     }
 
                     <input type="text"
-                        className={`inputBox min-w-[260px] md:w-auto`}
+                        className={`inputBox min-w-[260px] sm:min-w-[400px] md:min-w-[540px]`}
                         name="name"
                         onChange={(event) => handleFormData(event)}
                         required
@@ -91,22 +92,23 @@ function SignUpForm() {
 
                 {/* Password */}
                 <div className="relative">
-                    <div className="flex items-center">
+                    <div className="hidden md:flex items-center">
                         <BiLockOpen className="placeHolderIcon" />
                         <span className="label">Create Password</span>
                     </div>
 
                     <input type={open ? "text" : "password"}
-                        className="inputBox createPassword"
+                        className="inputBox createPassword min-w-[260px] sm:min-w-[400px] md:min-w-[540px]"
                         maxLength="6"
                         name="password"
                         onChange={(event) => handleFormData(event)}
                         value={formData.password}
                         required
+                        // placeholder="password"
                     />
 
                     {/* password be showed or not be showed */}
-                    <p className="absolute top-4 right-5 cursor-pointer">
+                    <p className="absolute top-5 md:top-3 right-5 cursor-pointer">
                         {open ? <BiSolidShow className="eye" onClick={() => setOpen(!open)} /> : <BsEyeSlash className="eye" onClick={() => setOpen(!open)} />}
                     </p>
 
@@ -120,7 +122,9 @@ function SignUpForm() {
 
                     {/* Form button */}
                     <div>
-                        <button type="submit" className="signInBtn">{isLoading ? "Loading..." : "Sign Up"}</button>
+                    <div>
+                        <button type="submit" className="signInBtn w-[260px] sm:w-[400px] md:[w-540px]" disabled={isLoading || !valid}> {isLoading ? "Loading..." : "Sign Up"}</button>
+                    </div>
                     </div>
 
                     <p className="formFooter">Already have an account? <Link className="formFooterLink" to="/signin">Sign In</Link></p>

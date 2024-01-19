@@ -14,18 +14,20 @@ export default function Dashboard() {
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content">
                     {/* Page content here */}
-                    <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
+                   <div className="flex items-center justify-end">
+                   <label htmlFor="my-drawer-2" className="drawer-button bg-sky-500 lg:hidden p-3 rounded-md z-50 m-2 cursor-pointer">Open Menu</label>
+                   </div>
                     <Outlet />
                 </div>
 
                 {/* side menu */}
                 <div className="drawer-side overflow-hidden">
-                    <div className="ml-20 mt-6 inline-block">
+                    <div className="md:ml-20 md:mt-6 inline-block">
                         <img src={logo} alt="logo" />
                     </div>
                     <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
 
-                    <ul className="menu p-4 w-80 min-h-full ml-12 pt-10">
+                    <ul className="menu p-4 w-80 min-h-full bg-gray-200 md:ml-12 pt-10 mt-20 rounded md:mt-0">
                         {/* Sidebar content here */}
                         <li className={`menuHolder ${path === "/dashboard" && ""}`}>
                             <Link to="/dashboard" className="flex items-center space-x-2">

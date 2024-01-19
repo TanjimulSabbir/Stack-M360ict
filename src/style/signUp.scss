@@ -1,27 +1,46 @@
-$char-w: 1ch;
-$gap: 3 * $char-w;
-$n-char: 6;
-$in-w: $n-char * ($char-w + $gap);
+@media (min-width: 1040px) {
+  $char-w: 1ch;
+  $gap: 3 * $char-w;
+  $n-char: 6;
+  $in-w: $n-char * ($char-w + $gap);
 
-.createPassword {
-  display: block;
-  margin: 0.6em auto;
-  border: none;
-  padding: 0;
-  width: $in-w;
-  background: repeating-linear-gradient(
-    90deg,
-    #38CB89,
-    #38CB89 $char-w,
-    transparent $char-w,
-    transparent $char-w + $gap
-  )
-  0 100% / #{$in-w - $gap} 2px no-repeat;
-  font: 5ch "Droid Sans Mono", consolas, monospace;
-  letter-spacing: $gap;
+  .createPassword {
+    display: block;
+    margin: 0.6em auto;
+    border: none;
+    padding: 0;
+    width: $in-w;
+    background: repeating-linear-gradient(90deg,
+      #38CB89,
+      #38CB89 $char-w,
+      transparent $char-w,
+      transparent $char-w + $gap ) 0 100% / #{$in-w - $gap} 2px no-repeat;
+    font: 5ch "Droid Sans Mono", consolas, monospace;
+    letter-spacing: $gap;
+  }
+
+  .createPassword:focus {
+    outline: none;
+    color: #38CB89;
+  }
 }
 
-.createPassword:focus {
-  outline: none;
-  color: #38CB89;
-}
+/* @media (min-width: 740px) {
+  .signInBtn {
+      min-width: 500px;
+  }
+
+  .inputBox {
+      min-width: 500px;
+  }
+} */
+
+// @media (min-width: 540px) {
+//   .signInBtn {
+//       min-width: 440px;
+//   }
+
+//   .inputBox {
+//       min-width: 440px;
+//   }
+// } 
