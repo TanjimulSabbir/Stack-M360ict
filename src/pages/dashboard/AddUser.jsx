@@ -30,7 +30,8 @@ function AddUser({ user, open, control }) {
 
     const handleAddUser = (event) => {
         event.preventDefault();
-        dispatch(editUser({ id: user?.id, data: user }))
+
+        dispatch(editUser({ id: user?.id, data: formData }))
     }
 
     return (
@@ -39,7 +40,7 @@ function AddUser({ user, open, control }) {
                 onClick={control}
                 className="fixed min-h-full inset-0 w-full z-10 bg-black/50 cursor-pointer"
             ></div>
-                <div className="absolute rounded-lg space-y-8 bg-white p-10 z-20">
+                <div className="rounded-lg w-[400px] lg:w-[600px] space-y-8 bg-white p-10 absolute top-1/2 left-1/3 z-20 -translate-x-1/3 -translate-y-1/3">
 
                     <form className="relative mt-8 space-y-6" onSubmit={handleAddUser}>
                         <h2 className="my-8 updateUserTitle">Update User</h2>
